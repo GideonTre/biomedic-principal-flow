@@ -48,8 +48,8 @@
     <!-- Main Container -->
     <div class="container">
 
-        <!-- LOGIN / REGISTER PAGE -->
-        <section id="auth-page" class="page active">
+        <!-- LOGIN PAGE -->
+        <section id="login-page" class="page active">
             <div class="auth-container">
                 <div class="auth-illustration">
                     <div class="illustration-content">
@@ -70,42 +70,258 @@
                         <h1>Welcome Back</h1>
                         <p>Sign in to continue learning</p>
                     </div>
-                    
-                    <div class="tabs">
-                        <button class="tab-btn active" onclick="toggleAuthMode('login')">Login</button>
-                        <button class="tab-btn" onclick="toggleAuthMode('register')">Register</button>
-                    </div>
 
-                    <form id="auth-form">
+                    <form id="login-form">
                         <div class="input-group">
-                            <label for="email"><i class="fas fa-envelope"></i> Gmail Address</label>
-                            <input type="email" id="email" placeholder="yourname@gmail.com" required>
+                            <label for="login-email"><i class="fas fa-envelope"></i> Gmail Address</label>
+                            <input type="email" id="login-email" placeholder="yourname@gmail.com" required>
                         </div>
                         
                         <div class="input-group">
-                            <label for="password"><i class="fas fa-lock"></i> Password</label>
+                            <label for="login-password"><i class="fas fa-lock"></i> Password</label>
                             <div class="password-input">
-                                <input type="password" id="password" placeholder="Enter your password" required>
-                                <button type="button" onclick="togglePassword()"><i class="fas fa-eye"></i></button>
+                                <input type="password" id="login-password" placeholder="Enter your password" required>
+                                <button type="button" onclick="togglePassword('login-password')"><i class="fas fa-eye"></i></button>
                             </div>
                         </div>
                         
-                        <div class="input-group" id="nameGroup" style="display:none;">
-                            <label for="fullname"><i class="fas fa-user"></i> Full Name</label>
-                            <input type="text" id="fullname" placeholder="Enter your full name">
+                        <div class="form-options">
+                            <label class="remember-me">
+                                <input type="checkbox" id="remember-me"> Remember me
+                            </label>
+                            <a href="#" onclick="showPage('forgot-password')" class="forgot-link">Forgot Password?</a>
                         </div>
-
-                        <select id="role">
-                            <option value="student">Student</option>
-                            <option value="teacher">Teacher</option>
-                        </select>
                         
                         <button type="submit" class="btn-primary">
                             <i class="fas fa-sign-in-alt"></i> Sign In
                         </button>
                     </form>
-                    <p class="note">Demo: <b>student@gmail.com</b> / <b>123</b> or <b>teacher@gmail.com</b> / <b>123</b></p>
+                    
+                    <div class="auth-footer">
+                        <p>Don't have an account? <a href="#" onclick="showPage('register')">Register here</a></p>
+                    </div>
+                    
+                    <div class="demo-accounts">
+                        <p><b>Demo Accounts:</b></p>
+                        <p>Student: <code>student@gmail.com</code> / <code>123</code></p>
+                        <p>Teacher: <code>teacher@gmail.com</code> / <code>123</code></p>
+                    </div>
                 </div>
+            </div>
+        </section>
+
+        <!-- REGISTER PAGE -->
+        <section id="register-page" class="page hidden">
+            <div class="auth-container">
+                <div class="auth-illustration">
+                    <div class="illustration-content">
+                        <i class="fas fa-user-plus"></i>
+                        <h2>Create Account</h2>
+                        <p>Join TDBE 1:2 2025/2026</p>
+                        <div class="features-list">
+                            <div class="feature"><i class="fas fa-check-circle"></i> Instant Account Creation</div>
+                            <div class="feature"><i class="fas fa-check-circle"></i> Email Verification</div>
+                            <div class="feature"><i class="fas fa-check-circle"></i> Access All Materials</div>
+                            <div class="feature"><i class="fas fa-check-circle"></i> 24/7 Support</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="auth-box">
+                    <div class="auth-header">
+                        <div class="auth-logo"><i class="fas fa-user-plus"></i></div>
+                        <h1>Create Account</h1>
+                        <p>Fill in your details to get started</p>
+                    </div>
+
+                    <form id="register-form">
+                        <div class="input-group">
+                            <label for="reg-name"><i class="fas fa-user"></i> Full Name</label>
+                            <input type="text" id="reg-name" placeholder="Enter your full name" required>
+                        </div>
+                        
+                        <div class="input-group">
+                            <label for="reg-email"><i class="fas fa-envelope"></i> Gmail Address</label>
+                            <input type="email" id="reg-email" placeholder="yourname@gmail.com" required>
+                            <small class="input-hint">Must be a valid Gmail address</small>
+                        </div>
+                        
+                        <div class="input-group">
+                            <label for="reg-password"><i class="fas fa-lock"></i> Password</label>
+                            <div class="password-input">
+                                <input type="password" id="reg-password" placeholder="Create a password" required minlength="6">
+                                <button type="button" onclick="togglePassword('reg-password')"><i class="fas fa-eye"></i></button>
+                            </div>
+                            <small class="input-hint">Minimum 6 characters</small>
+                        </div>
+                        
+                        <div class="input-group">
+                            <label for="reg-confirm"><i class="fas fa-lock"></i> Confirm Password</label>
+                            <div class="password-input">
+                                <input type="password" id="reg-confirm" placeholder="Confirm your password" required>
+                                <button type="button" onclick="togglePassword('reg-confirm')"><i class="fas fa-eye"></i></button>
+                            </div>
+                        </div>
+                        
+                        <div class="input-group">
+                            <label for="reg-role"><i class="fas fa-users"></i> Account Type</label>
+                            <select id="reg-role" required>
+                                <option value="">Select your role</option>
+                                <option value="student">Student</option>
+                                <option value="teacher">Teacher</option>
+                            </select>
+                        </div>
+                        
+                        <div class="terms-checkbox">
+                            <label>
+                                <input type="checkbox" id="reg-terms" required> 
+                                I agree to the <a href="#" onclick="showTerms()">Terms & Conditions</a>
+                            </label>
+                        </div>
+                        
+                        <button type="submit" class="btn-primary">
+                            <i class="fas fa-user-plus"></i> Create Account
+                        </button>
+                    </form>
+                    
+                    <div class="auth-footer">
+                        <p>Already have an account? <a href="#" onclick="showPage('login')">Sign in here</a></p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- EMAIL VERIFICATION PAGE -->
+        <section id="verify-page" class="page hidden">
+            <div class="auth-container">
+                <div class="auth-illustration">
+                    <div class="illustration-content">
+                        <i class="fas fa-envelope-open-text"></i>
+                        <h2>Verify Your Email</h2>
+                        <p>We've sent a verification code to your email</p>
+                    </div>
+                </div>
+                <div class="auth-box">
+                    <div class="auth-header">
+                        <div class="auth-logo"><i class="fas fa-envelope"></i></div>
+                        <h1>Email Verification</h1>
+                        <p>Enter the 6-digit code sent to <span id="verify-email-display"></span></p>
+                    </div>
+
+                    <form id="verify-form">
+                        <div class="verification-code">
+                            <input type="text" maxlength="1" class="code-input" oninput="moveToNext(this, 'code2')" id="code1">
+                            <input type="text" maxlength="1" class="code-input" oninput="moveToNext(this, 'code3')" id="code2">
+                            <input type="text" maxlength="1" class="code-input" oninput="moveToNext(this, 'code4')" id="code3">
+                            <input type="text" maxlength="1" class="code-input" oninput="moveToNext(this, 'code5')" id="code4">
+                            <input type="text" maxlength="1" class="code-input" oninput="moveToNext(this, 'code6')" id="code5">
+                            <input type="text" maxlength="1" class="code-input" id="code6">
+                        </div>
+                        
+                        <button type="submit" class="btn-primary">
+                            <i class="fas fa-check-circle"></i> Verify Email
+                        </button>
+                    </form>
+                    
+                    <div class="auth-footer">
+                        <p>Didn't receive the code? <a href="#" onclick="resendVerification()">Resend Code</a></p>
+                        <p><a href="#" onclick="showPage('register')">← Back to Registration</a></p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- FORGOT PASSWORD PAGE -->
+        <section id="forgot-password-page" class="page hidden">
+            <div class="auth-container">
+                <div class="auth-illustration">
+                    <div class="illustration-content">
+                        <i class="fas fa-key"></i>
+                        <h2>Reset Password</h2>
+                        <p>Enter your email to receive a reset link</p>
+                    </div>
+                </div>
+                <div class="auth-box">
+                    <div class="auth-header">
+                        <div class="auth-logo"><i class="fas fa-key"></i></div>
+                        <h1>Forgot Password?</h1>
+                        <p>Enter your email address and we'll send you a reset link</p>
+                    </div>
+
+                    <form id="forgot-form">
+                        <div class="input-group">
+                            <label for="forgot-email"><i class="fas fa-envelope"></i> Gmail Address</label>
+                            <input type="email" id="forgot-email" placeholder="yourname@gmail.com" required>
+                        </div>
+                        
+                        <button type="submit" class="btn-primary">
+                            <i class="fas fa-paper-plane"></i> Send Reset Link
+                        </button>
+                    </form>
+                    
+                    <div class="auth-footer">
+                        <p><a href="#" onclick="showPage('login')">← Back to Login</a></p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- RESET PASSWORD PAGE -->
+        <section id="reset-password-page" class="page hidden">
+            <div class="auth-container">
+                <div class="auth-illustration">
+                    <div class="illustration-content">
+                        <i class="fas fa-lock-open"></i>
+                        <h2>Set New Password</h2>
+                        <p>Enter your new password below</p>
+                    </div>
+                </div>
+                <div class="auth-box">
+                    <div class="auth-header">
+                        <div class="auth-logo"><i class="fas fa-lock"></i></div>
+                        <h1>Set New Password</h1>
+                        <p>Your new password must be different from previous passwords</p>
+                    </div>
+
+                    <form id="reset-form">
+                        <div class="input-group">
+                            <label for="new-password"><i class="fas fa-lock"></i> New Password</label>
+                            <div class="password-input">
+                                <input type="password" id="new-password" placeholder="Enter new password" required minlength="6">
+                                <button type="button" onclick="togglePassword('new-password')"><i class="fas fa-eye"></i></button>
+                            </div>
+                        </div>
+                        
+                        <div class="input-group">
+                            <label for="confirm-new-password"><i class="fas fa-lock"></i> Confirm New Password</label>
+                            <div class="password-input">
+                                <input type="password" id="confirm-new-password" placeholder="Confirm new password" required>
+                                <button type="button" onclick="togglePassword('confirm-new-password')"><i class="fas fa-eye"></i></button>
+                            </div>
+                        </div>
+                        
+                        <button type="submit" class="btn-primary">
+                            <i class="fas fa-save"></i> Reset Password
+                        </button>
+                    </form>
+                    
+                    <div class="auth-footer">
+                        <p><a href="#" onclick="showPage('login')">← Back to Login</a></p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SUCCESS PAGE -->
+        <section id="success-page" class="page hidden">
+            <div class="success-container">
+                <div class="success-icon">
+                    <i class="fas fa-check-circle"></i>
+                </div>
+                <h1 id="success-title">Success!</h1>
+                <p id="success-message">Your action was completed successfully.</p>
+                <button class="btn-primary" onclick="showPage('login')" style="max-width: 300px; margin: 2rem auto;">
+                    <i class="fas fa-arrow-right"></i> Continue
+                </button>
             </div>
         </section>
 
@@ -113,223 +329,4 @@
         <section id="dashboard-page" class="page hidden">
             <div class="page-header">
                 <div class="welcome-section">
-                    <h2>Welcome back, <span id="student-name">Student</span>!</h2>
-                    <p>TDBE 1:2 2025/2026 - Biomedical Engineering</p>
-                </div>
-                <div class="header-actions">
-                    <button class="btn-secondary" onclick="showPage('materials')"><i class="fas fa-plus"></i> Browse Materials</button>
-                </div>
-            </div>
-
-            <!-- Stats Cards -->
-            <div class="stats-grid">
-                <div class="stat-card">
-                    <div class="stat-icon" style="background: linear-gradient(135deg, #4CAF50, #2E7D32);">
-                        <i class="fas fa-book"></i>
-                    </div>
-                    <div class="stat-content">
-                        <h3>Enrolled Classes</h3>
-                        <p class="big-number" id="stat-classes">0</p>
-                    </div>
-                </div>
-                <div class="stat-card">
-                    <div class="stat-icon" style="background: linear-gradient(135deg, #2196F3, #1565C0);">
-                        <i class="fas fa-chart-line"></i>
-                    </div>
-                    <div class="stat-content">
-                        <h3>Average Score</h3>
-                        <p class="big-number" id="stat-score">0%</p>
-                    </div>
-                </div>
-                <div class="stat-card">
-                    <div class="stat-icon" style="background: linear-gradient(135deg, #FF9800, #E65100);">
-                        <i class="fas fa-check-circle"></i>
-                    </div>
-                    <div class="stat-content">
-                        <h3>Attendance</h3>
-                        <p class="big-number">98%</p>
-                    </div>
-                </div>
-                <div class="stat-card">
-                    <div class="stat-icon" style="background: linear-gradient(135deg, #9C27B0, #6A1B9A);">
-                        <i class="fas fa-file-alt"></i>
-                    </div>
-                    <div class="stat-content">
-                        <h3>Total Materials</h3>
-                        <p class="big-number" id="stat-materials">0</p>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Progress Section -->
-            <div class="dashboard-row">
-                <div class="card progress-card">
-                    <h3><i class="fas fa-chart-pie"></i> Academic Performance</h3>
-                    <div class="progress-bar-container">
-                        <div class="progress-bar" id="overall-progress" style="width: 0%"></div>
-                    </div>
-                    <p id="progress-text">Calculating your GPA...</p>
-                    <div class="gpa-display">
-                        <div class="gpa-item">
-                            <span class="gpa-label">Current GPA</span>
-                            <span class="gpa-value" id="gpa-value">0.00</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="card announcements-card">
-                    <h3><i class="fas fa-bullhorn"></i> Announcements</h3>
-                    <div id="announcements-list">
-                        <div class="announcement-item urgent">
-                            <div class="announcement-icon"><i class="fas fa-exclamation-circle"></i></div>
-                            <div class="announcement-content">
-                                <h4>Welcome to TDBE 1:2 2025/2026</h4>
-                                <p>Access all your learning materials and track your progress here.</p>
-                                <span class="announcement-time">Just now</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Quick Access -->
-            <div class="dashboard-row">
-                <div class="card">
-                    <h3><i class="fas fa-clock"></i> Recent Materials</h3>
-                    <ul id="dash-materials-list" class="quick-list"></ul>
-                </div>
-                <div class="card">
-                    <h3><i class="fas fa-tasks"></i> Pending Assignments</h3>
-                    <ul id="dash-assignments-list" class="quick-list"></ul>
-                </div>
-            </div>
-        </section>
-
-        <!-- CLASSES PAGE -->
-        <section id="classes-page" class="page hidden">
-            <div class="page-header">
-                <h2><i class="fas fa-book"></i> My Classes - TDBE 1:2 2025/2026</h2>
-                <p>View and manage your enrolled courses</p>
-            </div>
-            <div class="classes-grid" id="classes-container"></div>
-        </section>
-
-        <!-- MATERIALS PAGE -->
-        <section id="materials-page" class="page hidden">
-            <div class="page-header">
-                <h2><i class="fas fa-file-download"></i> Learning Materials</h2>
-                <p>Download course materials, notes, and assignments</p>
-            </div>
-            <div class="filters-bar">
-                <div class="search-box">
-                    <i class="fas fa-search"></i>
-                    <input type="text" id="search-material" placeholder="Search materials..." onkeyup="filterMaterials()">
-                </div>
-                <select id="filter-class" onchange="filterByClass()">
-                    <option value="">All Courses</option>
-                </select>
-                <select id="filter-type" onchange="filterByType()">
-                    <option value="">All Types</option>
-                    <option value="PDF">PDF</option>
-                    <option value="DOCX">DOCX</option>
-                    <option value="PPTX">PPTX</option>
-                    <option value="Video">Video</option>
-                </select>
-            </div>
-            <div class="materials-list" id="materials-container"></div>
-        </section>
-
-        <!-- RESULTS PAGE -->
-        <section id="results-page" class="page hidden">
-            <div class="page-header">
-                <h2><i class="fas fa-chart-line"></i> Academic Results</h2>
-                <p>View your test scores and progress</p>
-            </div>
-            <div class="results-overview">
-                <div class="card">
-                    <h3><i class="fas fa-star"></i> Overall Performance</h3>
-                    <div class="performance-chart">
-                        <div class="chart-ring">
-                            <svg viewBox="0 0 100 100">
-                                <circle cx="50" cy="50" r="45" fill="none" stroke="#e0e0e0" stroke-width="8"/>
-                                <circle cx="50" cy="50" r="45" fill="none" stroke="#4CAF50" stroke-width="8" 
-                                    stroke-dasharray="283" stroke-dashoffset="283" id="progressRing"/>
-                            </svg>
-                            <div class="chart-center">
-                                <span id="ring-percent">0%</span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="grade-summary">
-                        <div class="grade-stat">
-                            <span class="grade-label">Highest</span>
-                            <span class="grade-value high" id="grade-high">A</span>
-                        </div>
-                        <div class="grade-stat">
-                            <span class="grade-label">Lowest</span>
-                            <span class="grade-value low" id="grade-low">C</span>
-                        </div>
-                        <div class="grade-stat">
-                            <span class="grade-label">GPA</span>
-                            <span class="grade-value" id="gpa-result">0.00</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="card">
-                    <h3><i class="fas fa-download"></i> Download Report Card</h3>
-                    <p>Generate and download your official academic report</p>
-                    <button class="btn-primary" onclick="downloadReportCard()">
-                        <i class="fas fa-file-pdf"></i> Download PDF Report
-                    </button>
-                </div>
-            </div>
-            <div class="table-container">
-                <table>
-                    <thead>
-                        <tr>
-                            <th>Course</th>
-                            <th>Assignment / Test</th>
-                            <th>Score</th>
-                            <th>Grade</th>
-                            <th>Comments</th>
-                        </tr>
-                    </thead>
-                    <tbody id="results-table-body"></tbody>
-                </table>
-            </div>
-        </section>
-
-        <!-- SCHEDULE PAGE -->
-        <section id="schedule-page" class="page hidden">
-            <div class="page-header">
-                <h2><i class="fas fa-calendar-alt"></i> Class Schedule</h2>
-                <p>TDBE 1:2 2025/2026 Weekly Timetable</p>
-            </div>
-            <div class="schedule-container">
-                <div class="schedule-card">
-                    <h3><i class="fas fa-clock"></i> Weekly Timetable</h3>
-                    <div class="timetable">
-                        <div class="timetable-header">
-                            <div>Time</div>
-                            <div>Monday</div>
-                            <div>Tuesday</div>
-                            <div>Wednesday</div>
-                            <div>Thursday</div>
-                            <div>Friday</div>
-                        </div>
-                        <div class="timetable-row">
-                            <div class="time">8:00 - 10:00</div>
-                            <div class="subject" data-day="mon">Hospital Info System</div>
-                            <div class="subject" data-day="tue">Biomedical Sensors</div>
-                            <div class="subject" data-day="wed">Electronic Circuits</div>
-                            <div class="subject" data-day="thu">Medical Imaging</div>
-                            <div class="subject" data-day="fri">Project Work</div>
-                        </div>
-                        <div class="timetable-row">
-                            <div class="time">10:00 - 12:00</div>
-                            <div class="subject" data-day="mon">Biomedical Signals</div>
-                            <div class="subject" data-day="tue">Electronic Circuits</div>
-                            <div class="subject" data-day="wed">Medical Electronics</div>
-                            <div class="subject" data-day="thu">Biomedical Sensors</div>
-                            <div class="subject" data-day="fri">Seminar</div>
-                        </div>
-                        <div class="timetable-row">
+                    <h2>Welcome
