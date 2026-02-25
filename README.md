@@ -13,7 +13,7 @@
 <body>
 
     <!-- Navigation Bar -->
-    <nav id="navbar" class="hidden">
+    <nav id="navbar">
         <div class="logo">
             <i class="fas fa-hospital-alt"></i>
             <span class="logo-text">TDBE 1:2 2025/2026</span>
@@ -23,9 +23,11 @@
             <li><a href="#" onclick="showPage('classes')"><i class="fas fa-book"></i> <span>My Classes</span></a></li>
             <li><a href="#" onclick="showPage('materials')"><i class="fas fa-file-download"></i> <span>Materials</span></a></li>
             <li><a href="#" onclick="showPage('results')"><i class="fas fa-chart-line"></i> <span>Results</span></a></li>
+            <li><a href="#" onclick="showPage('schedule')"><i class="fas fa-calendar-alt"></i> <span>Schedule</span></a></li>
+            <li><a href="#" onclick="showPage('assignments')"><i class="fas fa-tasks"></i> <span>Assignments</span></a></li>
+            <li><a href="#" onclick="showPage('forum')"><i class="fas fa-comments"></i> <span>Forum</span></a></li>
             <li><a href="#" onclick="showPage('profile')"><i class="fas fa-user"></i> <span>Profile</span></a></li>
-            <li><a href="#" onclick="showPage('admin')" id="adminLink" class="hidden"><i class="fas fa-cog"></i> <span>Admin</span></a></li>
-            <li><a href="#" onclick="logout()"><i class="fas fa-sign-out-alt"></i> <span>Logout</span></a></li>
+            <li><a href="#" onclick="showPage('admin')"><i class="fas fa-cog"></i> <span>Admin</span></a></li>
         </ul>
         <div class="nav-right">
             <button class="collapse-btn" onclick="toggleNavbar()"><i class="fas fa-chevron-left"></i></button>
@@ -36,127 +38,11 @@
     <!-- Main Container -->
     <div class="container">
 
-        <!-- LOGIN PAGE -->
-        <section id="login-page" class="page active">
-            <div class="auth-wrapper">
-                <div class="auth-left">
-                    <div class="auth-illustration">
-                        <i class="fas fa-heartbeat"></i>
-                        <h2>TDBE 1:2 2025/2026</h2>
-                        <p>Biomedical Engineering Learning Portal</p>
-                        <ul class="feature-list">
-                            <li><i class="fas fa-check-circle"></i> Access Learning Materials</li>
-                            <li><i class="fas fa-check-circle"></i> Track Your Progress</li>
-                            <li><i class="fas fa-check-circle"></i> Submit Assignments</li>
-                            <li><i class="fas fa-check-circle"></i> View Results</li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="auth-right">
-                    <div class="auth-box">
-                        <div class="auth-header">
-                            <div class="auth-logo"><i class="fas fa-hospital-alt"></i></div>
-                            <h1>Welcome Back</h1>
-                            <p>Sign in to continue learning</p>
-                        </div>
-
-                        <form id="login-form" onsubmit="handleLogin(event)">
-                            <div class="form-group">
-                                <label for="login-email"><i class="fas fa-envelope"></i> Gmail Address</label>
-                                <input type="email" id="login-email" placeholder="yourname@gmail.com" required>
-                            </div>
-                            
-                            <div class="form-group">
-                                <label for="login-password"><i class="fas fa-lock"></i> Password</label>
-                                <input type="password" id="login-password" placeholder="Enter your password" required>
-                            </div>
-                            
-                            <button type="submit" class="btn-primary">
-                                <i class="fas fa-sign-in-alt"></i> Sign In
-                            </button>
-                        </form>
-                        
-                        <div class="auth-toggle">
-                            <p>Don't have an account? <a href="#" onclick="showPage('register')">Register here</a></p>
-                        </div>
-                        
-                        <div class="demo-info">
-                            <p><strong>Demo Accounts:</strong></p>
-                            <p>Student: <code>student@gmail.com</code> / <code>123</code></p>
-                            <p>Teacher: <code>teacher@gmail.com</code> / <code>123</code></p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- REGISTER PAGE -->
-        <section id="register-page" class="page hidden">
-            <div class="auth-wrapper">
-                <div class="auth-left">
-                    <div class="auth-illustration">
-                        <i class="fas fa-user-plus"></i>
-                        <h2>Create Account</h2>
-                        <p>Join TDBE 1:2 2025/2026</p>
-                        <ul class="feature-list">
-                            <li><i class="fas fa-check-circle"></i> Instant Registration</li>
-                            <li><i class="fas fa-check-circle"></i> Email Verification</li>
-                            <li><i class="fas fa-check-circle"></i> Access All Materials</li>
-                            <li><i class="fas fa-check-circle"></i> 24/7 Support</li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="auth-right">
-                    <div class="auth-box">
-                        <div class="auth-header">
-                            <div class="auth-logo"><i class="fas fa-user-plus"></i></div>
-                            <h1>Create Account</h1>
-                            <p>Fill in your details to get started</p>
-                        </div>
-
-                        <form id="register-form" onsubmit="handleRegister(event)">
-                            <div class="form-group">
-                                <label for="reg-name"><i class="fas fa-user"></i> Full Name</label>
-                                <input type="text" id="reg-name" placeholder="Enter your full name" required>
-                            </div>
-                            
-                            <div class="form-group">
-                                <label for="reg-email"><i class="fas fa-envelope"></i> Gmail Address</label>
-                                <input type="email" id="reg-email" placeholder="yourname@gmail.com" required>
-                            </div>
-                            
-                            <div class="form-group">
-                                <label for="reg-password"><i class="fas fa-lock"></i> Password</label>
-                                <input type="password" id="reg-password" placeholder="Create a password (min 6 characters)" minlength="6" required>
-                            </div>
-                            
-                            <div class="form-group">
-                                <label for="reg-role"><i class="fas fa-users"></i> Account Type</label>
-                                <select id="reg-role" required>
-                                    <option value="">Select your role</option>
-                                    <option value="student">Student</option>
-                                    <option value="teacher">Teacher</option>
-                                </select>
-                            </div>
-                            
-                            <button type="submit" class="btn-primary">
-                                <i class="fas fa-user-plus"></i> Create Account
-                            </button>
-                        </form>
-                        
-                        <div class="auth-toggle">
-                            <p>Already have an account? <a href="#" onclick="showPage('login')">Sign in here</a></p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
         <!-- DASHBOARD PAGE -->
-        <section id="dashboard-page" class="page hidden">
+        <section id="dashboard-page" class="page active">
             <div class="page-header">
                 <h2><i class="fas fa-tachometer-alt"></i> Dashboard</h2>
-                <p>Welcome back, <span id="student-name">Student</span>! - TDBE 1:2 2025/2026</p>
+                <p>TDBE 1:2 2025/2026 - Biomedical Engineering Learning Portal</p>
             </div>
 
             <!-- Stats -->
@@ -166,8 +52,8 @@
                         <i class="fas fa-book"></i>
                     </div>
                     <div class="stat-content">
-                        <h3>Enrolled Classes</h3>
-                        <p class="big-number" id="stat-classes">0</p>
+                        <h3>Total Classes</h3>
+                        <p class="big-number" id="stat-classes">7</p>
                     </div>
                 </div>
                 <div class="stat-card">
@@ -176,7 +62,7 @@
                     </div>
                     <div class="stat-content">
                         <h3>Average Score</h3>
-                        <p class="big-number" id="stat-score">0%</p>
+                        <p class="big-number" id="stat-score">87%</p>
                     </div>
                 </div>
                 <div class="stat-card">
@@ -194,7 +80,7 @@
                     </div>
                     <div class="stat-content">
                         <h3>Materials</h3>
-                        <p class="big-number" id="stat-materials">0</p>
+                        <p class="big-number" id="stat-materials">18</p>
                     </div>
                 </div>
             </div>
@@ -205,29 +91,60 @@
                     <h3><i class="fas fa-chart-pie"></i> Academic Performance</h3>
                     <div class="progress-section">
                         <div class="progress-bar-container">
-                            <div class="progress-bar" id="overall-progress" style="width: 0%"></div>
+                            <div class="progress-bar" id="overall-progress" style="width: 87%"></div>
                         </div>
-                        <p id="progress-text">Calculating...</p>
-                        <p class="gpa-text">GPA: <strong id="gpa-value">0.00</strong></p>
+                        <p id="progress-text">Overall Performance: 87%</p>
+                        <p class="gpa-text">GPA: <strong id="gpa-value">3.67</strong></p>
                     </div>
                 </div>
                 <div class="card">
                     <h3><i class="fas fa-bullhorn"></i> Announcements</h3>
                     <div id="announcements-list">
-                        <div class="announcement-item">
-                            <div class="announcement-icon"><i class="fas fa-info-circle"></i></div>
+                        <div class="announcement-item urgent">
+                            <div class="announcement-icon"><i class="fas fa-exclamation-circle"></i></div>
                             <div class="announcement-content">
                                 <h4>Welcome to TDBE 1:2 2025/2026</h4>
-                                <p>Access all your learning materials here.</p>
+                                <p>Access all your learning materials and track your progress here.</p>
+                                <span class="announcement-time">Just now</span>
+                            </div>
+                        </div>
+                        <div class="announcement-item">
+                            <div class="announcement-icon" style="background: rgba(25, 118, 210, 0.1); color: #1976D2;"><i class="fas fa-info-circle"></i></div>
+                            <div class="announcement-content">
+                                <h4>Exam Schedule Released</h4>
+                                <p>Midterm examination schedule has been posted.</p>
+                                <span class="announcement-time">1 day ago</span>
+                            </div>
+                        </div>
+                        <div class="announcement-item">
+                            <div class="announcement-icon" style="background: rgba(39, 174, 96, 0.1); color: #27AE60;"><i class="fas fa-check-circle"></i></div>
+                            <div class="announcement-content">
+                                <h4>New Materials Uploaded</h4>
+                                <p>Week 3 lecture notes have been uploaded.</p>
+                                <span class="announcement-time">2 days ago</span>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
 
-            <div class="card">
-                <h3><i class="fas fa-clock"></i> Recent Materials</h3>
-                <ul id="dash-materials-list" class="materials-quick-list"></ul>
+            <div class="dashboard-row">
+                <div class="card">
+                    <h3><i class="fas fa-clock"></i> Recent Materials</h3>
+                    <ul id="dash-materials-list" class="materials-quick-list">
+                        <li><span>Introduction to Hospital Information Systems</span><span class="file-type">PDF</span></li>
+                        <li><span>Biosensors - Principles and Applications</span><span class="file-type">PDF</span></li>
+                        <li><span>ECG Signal Processing Tutorial</span><span class="file-type">PDF</span></li>
+                    </ul>
+                </div>
+                <div class="card">
+                    <h3><i class="fas fa-tasks"></i> Pending Assignments</h3>
+                    <ul class="materials-quick-list">
+                        <li><span>Hospital System Analysis</span><span class="file-type" style="background: rgba(243, 156, 18, 0.1); color: #F39C12;">Due: Feb 15</span></li>
+                        <li><span>Sensor Design Project</span><span class="file-type" style="background: rgba(243, 156, 18, 0.1); color: #F39C12;">Due: Feb 20</span></li>
+                        <li><span>ECG Analysis Report</span><span class="file-type" style="background: rgba(39, 174, 96, 0.1); color: #27AE60;">Submitted</span></li>
+                    </ul>
+                </div>
             </div>
         </section>
 
@@ -237,7 +154,92 @@
                 <h2><i class="fas fa-book"></i> My Classes</h2>
                 <p>TDBE 1:2 2025/2026 - All Available Courses</p>
             </div>
-            <div class="classes-grid" id="classes-container"></div>
+            <div class="classes-grid">
+                <div class="class-card">
+                    <div class="class-header">
+                        <h3>HIS 301: Hospital Information System and Management</h3>
+                        <span class="class-badge">3 Materials</span>
+                    </div>
+                    <p>Learn about healthcare IT systems, hospital management software, health informatics, and electronic health records.</p>
+                    <div class="class-meta">
+                        <span><i class="fas fa-user"></i> Dr. Smith</span>
+                        <span><i class="fas fa-clock"></i> Mon, Wed, Fri - 8:00 AM</span>
+                    </div>
+                    <button class="btn-enroll" onclick="showPage('materials')">View Materials</button>
+                </div>
+                <div class="class-card">
+                    <div class="class-header">
+                        <h3>BMD 302: Biomedical Sensors and Measurement Devices</h3>
+                        <span class="class-badge">3 Materials</span>
+                    </div>
+                    <p>Study of biosensors, transducers, medical measurement equipment, and signal acquisition systems.</p>
+                    <div class="class-meta">
+                        <span><i class="fas fa-user"></i> Prof. Johnson</span>
+                        <span><i class="fas fa-clock"></i> Tue, Thu - 10:00 AM</span>
+                    </div>
+                    <button class="btn-enroll" onclick="showPage('materials')">View Materials</button>
+                </div>
+                <div class="class-card">
+                    <div class="class-header">
+                        <h3>BSS 303: Biomedical Signals and Systems</h3>
+                        <span class="class-badge">2 Materials</span>
+                    </div>
+                    <p>Analysis of biological signals, ECG, EEG, signal processing, and system modeling.</p>
+                    <div class="class-meta">
+                        <span><i class="fas fa-user"></i> Dr. Williams</span>
+                        <span><i class="fas fa-clock"></i> Mon, Wed - 10:00 AM</span>
+                    </div>
+                    <button class="btn-enroll" onclick="showPage('materials')">View Materials</button>
+                </div>
+                <div class="class-card">
+                    <div class="class-header">
+                        <h3>TME 304: Troubleshooting of Medical Electronics</h3>
+                        <span class="class-badge">2 Materials</span>
+                    </div>
+                    <p>Diagnostic techniques, repair procedures, and maintenance of medical electronic equipment.</p>
+                    <div class="class-meta">
+                        <span><i class="fas fa-user"></i> Eng. Brown</span>
+                        <span><i class="fas fa-clock"></i> Fri - 2:00 PM</span>
+                    </div>
+                    <button class="btn-enroll" onclick="showPage('materials')">View Materials</button>
+                </div>
+                <div class="class-card">
+                    <div class="class-header">
+                        <h3>ECD 305: Electronic Circuits and Devices</h3>
+                        <span class="class-badge">2 Materials</span>
+                    </div>
+                    <p>Fundamentals of electronic circuits, amplifiers, semiconductor devices, and circuit design.</p>
+                    <div class="class-meta">
+                        <span><i class="fas fa-user"></i> Prof. Davis</span>
+                        <span><i class="fas fa-clock"></i> Tue, Thu - 8:00 AM</span>
+                    </div>
+                    <button class="btn-enroll" onclick="showPage('materials')">View Materials</button>
+                </div>
+                <div class="class-card">
+                    <div class="class-header">
+                        <h3>MIT 306: Medical Imaging Techniques</h3>
+                        <span class="class-badge">3 Materials</span>
+                    </div>
+                    <p>X-ray, CT, MRI, ultrasound, PET scans, and other medical imaging modalities.</p>
+                    <div class="class-meta">
+                        <span><i class="fas fa-user"></i> Dr. Miller</span>
+                        <span><i class="fas fa-clock"></i> Wed, Fri - 10:00 AM</span>
+                    </div>
+                    <button class="btn-enroll" onclick="showPage('materials')">View Materials</button>
+                </div>
+                <div class="class-card">
+                    <div class="class-header">
+                        <h3>MDP 307: Multi Disciplinary Design Project I / Real life Project II</h3>
+                        <span class="class-badge">3 Materials</span>
+                    </div>
+                    <p>Capstone project combining biomedical engineering principles with real-world applications.</p>
+                    <div class="class-meta">
+                        <span><i class="fas fa-user"></i> Dr. Wilson</span>
+                        <span><i class="fas fa-clock"></i> Mon-Fri - Project Work</span>
+                    </div>
+                    <button class="btn-enroll" onclick="showPage('materials')">View Materials</button>
+                </div>
+            </div>
         </section>
 
         <!-- MATERIALS PAGE -->
@@ -250,117 +252,35 @@
                 <i class="fas fa-search"></i>
                 <input type="text" id="search-material" placeholder="Search materials..." onkeyup="filterMaterials()">
             </div>
-            <div class="materials-list" id="materials-container"></div>
-        </section>
-
-        <!-- RESULTS PAGE -->
-        <section id="results-page" class="page hidden">
-            <div class="page-header">
-                <h2><i class="fas fa-chart-line"></i> Academic Results</h2>
-                <p>View your test scores and progress</p>
-            </div>
-            <div class="card">
-                <h3>Overall Performance: <span id="results-average">0%</span></h3>
-                <div class="progress-bar-container" style="height: 20px;">
-                    <div class="progress-bar" id="results-progress" style="width: 0%"></div>
+            <div class="materials-list">
+                <div class="material-item">
+                    <div class="material-icon">📄</div>
+                    <div class="material-info">
+                        <h4>Introduction to Hospital Information Systems</h4>
+                        <p>HIS 301 • PDF • 2.4 MB • 2026-01-15</p>
+                    </div>
+                    <div class="material-actions">
+                        <button class="btn-primary" onclick="downloadMaterial('HIS-Introduction.pdf')"><i class="fas fa-download"></i> Download</button>
+                        <button class="btn-secondary" onclick="viewMaterial('Introduction to Hospital Information Systems', '📄', 'This PDF covers the fundamentals of Hospital Information Systems including:\n\n• Overview of HIS\n• Electronic Health Records\n• Hospital Management Software\n• Health Informatics\n\nClick download to save this file.')"><i class="fas fa-eye"></i> View</button>
+                    </div>
                 </div>
-                <p>GPA: <strong id="results-gpa">0.00</strong></p>
-            </div>
-            <div class="table-container">
-                <table>
-                    <thead>
-                        <tr>
-                            <th>Course</th>
-                            <th>Assignment</th>
-                            <th>Score</th>
-                            <th>Grade</th>
-                            <th>Comments</th>
-                        </tr>
-                    </thead>
-                    <tbody id="results-table-body"></tbody>
-                </table>
-            </div>
-        </section>
-
-        <!-- PROFILE PAGE -->
-        <section id="profile-page" class="page hidden">
-            <div class="page-header">
-                <h2><i class="fas fa-user"></i> My Profile</h2>
-            </div>
-            <div class="profile-card">
-                <div class="profile-avatar">
-                    <i class="fas fa-user"></i>
+                <div class="material-item">
+                    <div class="material-icon">📄</div>
+                    <div class="material-info">
+                        <h4>Health Informatics Fundamentals</h4>
+                        <p>HIS 301 • PDF • 3.1 MB • 2026-01-18</p>
+                    </div>
+                    <div class="material-actions">
+                        <button class="btn-primary" onclick="downloadMaterial('Health-Informatics.pdf')"><i class="fas fa-download"></i> Download</button>
+                        <button class="btn-secondary" onclick="viewMaterial('Health Informatics Fundamentals', '📄', 'This document covers:\n\n• Health Information Systems\n• Data Management in Healthcare\n• Privacy and Security\n• Interoperability Standards\n\nClick download to save.')"><i class="fas fa-eye"></i> View</button>
+                    </div>
                 </div>
-                <div class="profile-info">
-                    <h3 id="profile-name">Student Name</h3>
-                    <p id="profile-email">student@gmail.com</p>
-                    <p id="profile-role">Student</p>
-                    <p id="profile-id">ID: TDBE/2025/001</p>
-                </div>
-            </div>
-        </section>
-
-        <!-- ADMIN PAGE -->
-        <section id="admin-page" class="page hidden">
-            <div class="page-header">
-                <h2><i class="fas fa-cog"></i> Admin Panel</h2>
-                <p>Manage your TDBE 1:2 2025/2026 Website</p>
-            </div>
-            
-            <div class="admin-grid">
-                <div class="card">
-                    <h3><i class="fas fa-upload"></i> Upload Material</h3>
-                    <form onsubmit="handleUpload(event)">
-                        <div class="form-group">
-                            <select id="upload-class" required><option value="">Select Course</option></select>
-                        </div>
-                        <div class="form-group">
-                            <input type="text" id="upload-title" placeholder="Material Title" required>
-                        </div>
-                        <div class="form-group">
-                            <select id="upload-type" required>
-                                <option value="">Select Type</option>
-                                <option value="PDF">PDF</option>
-                                <option value="DOCX">DOCX</option>
-                                <option value="PPTX">PPTX</option>
-                            </select>
-                        </div>
-                        <button type="submit" class="btn-primary"><i class="fas fa-upload"></i> Upload</button>
-                    </form>
-                </div>
-                
-                <div class="card">
-                    <h3><i class="fas fa-plus"></i> Add Result</h3>
-                    <form onsubmit="handleAddResult(event)">
-                        <div class="form-group">
-                            <input type="text" id="result-subject" placeholder="Course Name" required>
-                        </div>
-                        <div class="form-group">
-                            <input type="text" id="result-assignment" placeholder="Assignment Name" required>
-                        </div>
-                        <div class="form-group">
-                            <input type="number" id="result-score" placeholder="Score (0-100)" required>
-                        </div>
-                        <div class="form-group">
-                            <input type="text" id="result-comment" placeholder="Comment" required>
-                        </div>
-                        <button type="submit" class="btn-primary"><i class="fas fa-plus"></i> Add Result</button>
-                    </form>
-                </div>
-            </div>
-        </section>
-
-    </div>
-
-    <!-- Notification -->
-    <div id="notification"></div>
-
-    <!-- Footer -->
-    <footer>
-        <p><i class="fas fa-hospital-alt"></i> TDBE 1:2 2025/2026 - Biomedical Engineering Learning Portal</p>
-        <p>&copy; 2026 All Rights Reserved</p>
-    </footer>
-
-    <script src="script.js"></script>
-</body>
-</html>
+                <div class="material-item">
+                    <div class="material-icon">📄</div>
+                    <div class="material-info">
+                        <h4>Biosensors - Principles and Applications</h4>
+                        <p>BMD 302 • PDF • 4.2 MB • 2026-01-10</p>
+                    </div>
+                    <div class="material-actions">
+                        <button class="btn-primary" onclick="downloadMaterial('Biosensors-Principles.pdf')"><i class="fas fa-download"></i> Download</button>
+                        <button class="btn-secondary" onclick="viewMaterial('Biosensors - Principles and Applications', '📄', 'This PDF covers:\n\n• Types of Biosensors\n• Working Principles\n• Medical Applications\n• Signal Transduction\n\nClick download to save.')
