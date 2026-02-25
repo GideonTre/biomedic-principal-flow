@@ -3,6 +3,7 @@
 // Full Functional LMS for Students & Teachers
 // ============================================
 
+// Base URL for file downloads
 const BASE_URL = 'https://gideontre.github.io/biomedic-principal-flow/downloads/';
 
 // ============================================
@@ -10,9 +11,38 @@ const BASE_URL = 'https://gideontre.github.io/biomedic-principal-flow/downloads/
 // ============================================
 const db = {
     users: [
-        { id: 1, email: 'student@gmail.com', password: '123', role: 'student', name: 'Gideon Tre', studentId: 'TDBE/2025/001', enrolledClasses: [1,2,3,4,5,6,7], attendance: 98 },
-        { id: 2, email: 'teacher@gmail.com', password: '123', role: 'teacher', name: 'Dr. Smith', department: 'Biomedical Engineering' },
-        { id: 3, email: 'admin@gmail.com', password: 'admin', role: 'admin', name: 'Administrator' }
+        { 
+            id: 1, 
+            email: 'student@gmail.com', 
+            password: '123', 
+            role: 'student', 
+            name: 'Gideon Tre', 
+            studentId: 'TDBE/2025/001',
+            enrolledClasses: [1, 2, 3, 4, 5, 6, 7],
+            attendance: 98,
+            verified: true,
+            avatar: null,
+            createdAt: '2025-09-01'
+        },
+        { 
+            id: 2, 
+            email: 'teacher@gmail.com', 
+            password: '123', 
+            role: 'teacher', 
+            name: 'Dr. Smith',
+            department: 'Biomedical Engineering',
+            verified: true,
+            createdAt: '2025-01-01'
+        },
+        { 
+            id: 3, 
+            email: 'admin@gmail.com', 
+            password: 'admin', 
+            role: 'admin', 
+            name: 'Administrator',
+            verified: true,
+            createdAt: '2025-01-01'
+        }
     ],
     classes: [
         { id: 1, name: 'Hospital Information System and Management', code: 'HIS 301', description: 'Learn about healthcare IT systems, hospital management software, health informatics, and electronic health records.', teacher: 'Dr. Smith', credits: 3, schedule: 'Mon, Wed, Fri - 8:00 AM' },
@@ -57,115 +87,68 @@ const db = {
         { id: 1, user: 'Dr. Smith', avatar: '👨‍🏫', content: 'Welcome to the discussion forum! Feel free to ask questions about Hospital Information Systems.', date: '2026-01-26', replies: 5 },
         { id: 2, user: 'John Doe', avatar: '👨‍🎓', content: 'Can someone explain the difference between HIS and EMR systems?', date: '2026-01-25', replies: 3 }
     ],
-    settings: {
-        siteName: 'TDBE 1:2 2025/2026',
-        primaryColor: '#2E7D32',
-        backgroundImage: '',
-        darkMode: false
-    }
+    verificationCodes: {},
+    passwordResetTokens: {}
 };
 
 // ============================================
 // GLOBAL VARIABLES
 // ============================================
 let currentUser = null;
-let authMode = 'login';
+let pendingRegistration = null;
 let selectedFile = null;
-let currentViewingMaterial = null;
 
 // ============================================
 // INITIALIZATION
 // ============================================
 document.addEventListener('DOMContentLoaded', function() {
     checkSavedSession();
-    document.getElementById('auth-form').addEventListener('submit', handleAuth);
+    setupAllForms();
 });
 
 function checkSavedSession() {
     const savedUser = localStorage.getItem('tdbe_currentUser');
     if (savedUser) {
         currentUser = JSON.parse(savedUser);
-        loginSuccess();
-    }
-}
-
-// ============================================
-// AUTHENTICATION
-// ============================================
-function toggleAuthMode(mode) {
-    authMode = mode;
-    document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
-    event.target.classList.add('active');
-    document.getElementById('nameGroup').style.display = mode === 'register' ? 'block' : 'none';
-}
-
-function handleAuth(e) {
-    e.preventDefault();
-    const email = document.getElementById('email').value.trim().toLowerCase();
-    const password = document.getElementById('password').value;
-    const role = document.getElementById('role').value;
-    const fullname = document.getElementById('fullname').value;
-    
-    if (authMode === 'login') {
-        const user = db.users.find(u => u.email === email && u.password === password);
-        if (user) {
-            currentUser = user;
-            localStorage.setItem('tdbe_currentUser', JSON.stringify(user));
+        if (currentUser.verified) {
             loginSuccess();
         } else {
-            showNotification('Invalid credentials! Try: student@gmail.com / 123', 'error');
-        }
-    } else {
-        const exists = db.users.find(u => u.email.toLowerCase() === email);
-        if (exists) {
-            showNotification('Email already registered!', 'error');
-        } else {
-            const newUser = { 
-                id: db.users.length + 1, email, password, role, 
-                name: fullname || email.split('@')[0],
-                enrolledClasses: role === 'student' ? [1,2] : [],
-                attendance: 100
-            };
-            db.users.push(newUser);
-            currentUser = newUser;
-            localStorage.setItem('tdbe_currentUser', JSON.stringify(newUser));
-            loginSuccess();
-            showNotification('Registration successful! Welcome to TDBE 1:2!', 'success');
+            currentUser = null;
+            localStorage.removeItem('tdbe_currentUser');
         }
     }
 }
 
-function loginSuccess() {
-    document.getElementById('auth-page').classList.remove('active');
-    document.getElementById('auth-page').classList.add('hidden');
-    document.getElementById('navbar').classList.remove('hidden');
+function setupAllForms() {
+    // Login form
+    document.getElementById('login-form').addEventListener('submit', handleLogin);
     
-    if (currentUser.role === 'teacher' || currentUser.role === 'admin') {
-        document.getElementById('adminLink').classList.remove('hidden');
-    }
-    showPage(currentUser.role === 'teacher' ? 'admin' : 'dashboard');
-    loadAllData();
-}
-
-function logout() {
-    currentUser = null;
-    localStorage.removeItem('tdbe_currentUser');
-    document.querySelectorAll('.page').forEach(p => { p.classList.remove('active'); p.classList.add('hidden'); });
-    document.getElementById('auth-page').classList.remove('hidden');
-    document.getElementById('auth-page').classList.add('active');
-    document.getElementById('navbar').classList.add('hidden');
-    document.getElementById('adminLink').classList.add('hidden');
-    document.getElementById('auth-form').reset();
-    showNotification('You have been logged out.', 'info');
+    // Register form
+    document.getElementById('register-form').addEventListener('submit', handleRegister);
+    
+    // Verify form
+    document.getElementById('verify-form').addEventListener('submit', handleVerification);
+    
+    // Forgot password form
+    document.getElementById('forgot-form').addEventListener('submit', handleForgotPassword);
+    
+    // Reset password form
+    document.getElementById('reset-form').addEventListener('submit', handleResetPassword);
 }
 
 // ============================================
 // NAVIGATION
 // ============================================
 function showPage(pageId) {
-    document.querySelectorAll('.page').forEach(page => { page.classList.remove('active'); page.classList.add('hidden'); });
+    document.querySelectorAll('.page').forEach(page => {
+        page.classList.remove('active');
+        page.classList.add('hidden');
+    });
     const targetPage = document.getElementById(pageId + '-page');
-    if (targetPage) { targetPage.classList.remove('hidden'); targetPage.classList.add('active'); }
+    if (targetPage) {
+        targetPage.classList.remove('hidden');
+        targetPage.classList.add('active');
+    }
 }
 
 function toggleNavbar() {
@@ -179,106 +162,219 @@ function toggleMobileMenu() {
 
 function toggleDarkMode() {
     document.body.classList.toggle('dark-mode');
-    db.settings.darkMode = !db.settings.darkMode;
 }
 
-function togglePassword() {
-    const input = document.getElementById('password');
-    input.type = input.type === 'password' ? 'text' : 'password';
-}
-
-// ============================================
-// LOAD ALL DATA
-// ============================================
-function loadAllData() {
-    if (currentUser.role === 'student') {
-        document.getElementById('student-name').textContent = currentUser.name;
-        loadDashboard();
-        loadClasses();
-        loadMaterials();
-        loadResults();
-        loadSchedule();
-        loadAssignments();
-        loadForum();
-        loadProfile();
-    } else {
-        loadAdminPanel();
-    }
+function togglePassword(fieldId) {
+    const field = document.getElementById(fieldId);
+    field.type = field.type === 'password' ? 'text' : 'password';
 }
 
 // ============================================
-// DASHBOARD
+// LOGIN
 // ============================================
-function loadDashboard() {
-    if (!currentUser || currentUser.role !== 'student') return;
+function handleLogin(e) {
+    e.preventDefault();
     
-    // Stats
-    document.getElementById('stat-classes').textContent = currentUser.enrolledClasses.length;
-    document.getElementById('stat-materials').textContent = db.materials.length;
+    const email = document.getElementById('login-email').value.trim().toLowerCase();
+    const password = document.getElementById('login-password').value;
     
-    const scores = db.results.map(r => r.score);
-    const avg = scores.length > 0 ? Math.round(scores.reduce((a, b) => a + b, 0) / scores.length) : 0;
-    document.getElementById('stat-score').textContent = avg + '%';
+    // Find user
+    const user = db.users.find(u => u.email.toLowerCase() === email && u.password === password);
     
-    // Progress bar
-    if (document.getElementById('overall-progress')) {
-        document.getElementById('overall-progress').style.width = avg + '%';
-        document.getElementById('progress-text').textContent = `Overall Performance: ${avg}%`;
-    }
-    
-    // GPA
-    const gpa = calculateGPA();
-    document.getElementById('gpa-value').textContent = gpa.toFixed(2);
-    
-    // Recent materials
-    const materialsList = document.getElementById('dash-materials-list');
-    if (materialsList) {
-        materialsList.innerHTML = '';
-        db.materials.slice(-3).reverse().forEach(m => {
-            const li = document.createElement('li');
-            li.innerHTML = `<span>${m.title}</span><span class="file-type">${m.type}</span>`;
-            materialsList.appendChild(li);
-        });
-    }
-    
-    // Pending assignments
-    const assignList = document.getElementById('dash-assignments-list');
-    if (assignList) {
-        assignList.innerHTML = '';
-        db.assignments.filter(a => a.status === 'pending').slice(0, 3).forEach(a => {
-            const li = document.createElement('li');
-            li.innerHTML = `<span>${a.title}</span><span class="file-type" style="background:rgba(243,156,18,0.1);color:var(--warning)">Due: ${a.dueDate}</span>`;
-            assignList.appendChild(li);
-        });
-    }
-}
-
-function calculateGPA() {
-    const gradePoints = { 'A': 4.0, 'A-': 3.7, 'B+': 3.3, 'B': 3.0, 'B-': 2.7, 'C+': 2.3, 'C': 2.0, 'C-': 1.7, 'D': 1.0, 'F': 0.0 };
-    let total = 0, count = 0;
-    db.results.forEach(r => { total += gradePoints[r.grade] || 0; count++; });
-    return count > 0 ? total / count : 0;
-}
-
-// ============================================
-// CLASSES
-// ============================================
-function loadClasses() {
-    const container = document.getElementById('classes-container');
-    if (!container) return;
-    
-    container.innerHTML = '';
-    db.classes.forEach(cls => {
-        const isEnrolled = currentUser.enrolledClasses.includes(cls.id);
-        const materialCount = db.materials.filter(m => m.classId === cls.id).length;
+    if (user) {
+        if (!user.verified) {
+            showVerificationPage(email);
+            showNotification('Please verify your email first!', 'warning');
+            return;
+        }
         
-        const card = document.createElement('div');
-        card.className = 'class-card';
-        card.innerHTML = `
-            <div class="class-header">
-                <h3>${cls.code}: ${cls.name}</h3>
-                <span class="class-badge">${materialCount} Materials</span>
-            </div>
-            <p>${cls.description}</p>
-            <div class="class-meta">
-                <span><i class="fas fa-user"></i> ${cls.
+        currentUser = user;
+        
+        if (document.getElementById('remember-me').checked) {
+            localStorage.setItem('tdbe_currentUser', JSON.stringify(user));
+        }
+        
+        loginSuccess();
+        showNotification(`Welcome back, ${user.name}!`, 'success');
+    } else {
+        showNotification('Invalid email or password!', 'error');
+    }
+}
+
+function loginSuccess() {
+    // Hide auth pages
+    document.querySelectorAll('#login-page, #register-page, #verify-page, #forgot-password-page, #reset-password-page').forEach(p => {
+        p.classList.remove('active');
+        p.classList.add('hidden');
+    });
+    
+    // Show navbar and dashboard
+    document.getElementById('navbar').classList.remove('hidden');
+    
+    if (currentUser.role === 'teacher' || currentUser.role === 'admin') {
+        document.getElementById('adminLink').classList.remove('hidden');
+    }
+    
+    // Redirect based on role
+    if (currentUser.role === 'teacher' || currentUser.role === 'admin') {
+        showPage('admin');
+    } else {
+        showPage('dashboard');
+    }
+    
+    // Load all data
+    loadAllData();
+}
+
+function logout() {
+    currentUser = null;
+    localStorage.removeItem('tdbe_currentUser');
+    
+    // Reset UI
+    document.querySelectorAll('.page').forEach(page => {
+        page.classList.remove('active');
+        page.classList.add('hidden');
+    });
+    
+    // Show login page
+    document.getElementById('login-page').classList.remove('hidden');
+    document.getElementById('login-page').classList.add('active');
+    document.getElementById('navbar').classList.add('hidden');
+    document.getElementById('adminLink').classList.add('hidden');
+    
+    // Clear forms
+    document.getElementById('login-form').reset();
+    
+    showNotification('You have been logged out.', 'info');
+}
+
+// ============================================
+// REGISTRATION
+// ============================================
+function handleRegister(e) {
+    e.preventDefault();
+    
+    const name = document.getElementById('reg-name').value.trim();
+    const email = document.getElementById('reg-email').value.trim().toLowerCase();
+    const password = document.getElementById('reg-password').value;
+    const confirmPassword = document.getElementById('reg-confirm').value;
+    const role = document.getElementById('reg-role').value;
+    
+    // Validation
+    if (password !== confirmPassword) {
+        showNotification('Passwords do not match!', 'error');
+        return;
+    }
+    
+    if (!email.endsWith('@gmail.com')) {
+        showNotification('Please use a valid Gmail address!', 'error');
+        return;
+    }
+    
+    // Check if email exists
+    if (db.users.find(u => u.email.toLowerCase() === email)) {
+        showNotification('This email is already registered!', 'error');
+        return;
+    }
+    
+    // Store pending registration
+    pendingRegistration = {
+        name,
+        email,
+        password,
+        role,
+        verified: false
+    };
+    
+    // Generate verification code
+    const code = generateVerificationCode();
+    db.verificationCodes[email] = {
+        code: code,
+        expires: Date.now() + 10 * 60 * 1000 // 10 minutes
+    };
+    
+    // Simulate sending email
+    simulateEmailSend(email, code, 'verification');
+    
+    // Show verification page
+    showVerificationPage(email);
+    showNotification('Registration successful! Please verify your email.', 'success');
+}
+
+function showVerificationPage(email) {
+    document.getElementById('verify-email-display').textContent = email;
+    document.getElementById('login-page').classList.remove('active');
+    document.getElementById('register-page').classList.remove('active');
+    document.getElementById('verify-page').classList.remove('hidden');
+    document.getElementById('verify-page').classList.add('active');
+    
+    // Clear previous code inputs
+    document.querySelectorAll('.code-input').forEach(input => {
+        input.value = '';
+    });
+    document.getElementById('code1').focus();
+}
+
+function generateVerificationCode() {
+    return Math.floor(100000 + Math.random() * 900000).toString();
+}
+
+function simulateEmailSend(email, code, type) {
+    // In a real application, this would send an actual email
+    // For demo purposes, we'll show the code in a notification
+    if (type === 'verification') {
+        showNotification(`📧 Verification code sent to ${email}`, 'success');
+        setTimeout(() => {
+            showNotification(`🔑 Your verification code is: ${code}`, 'info');
+        }, 2000);
+    } else if (type === 'passwordReset') {
+        showNotification(`📧 Password reset code sent to ${email}`, 'success');
+        setTimeout(() => {
+            showNotification(`🔑 Your reset code is: ${code}`, 'info');
+        }, 2000);
+    }
+}
+
+function moveToNext(current, nextId) {
+    if (current.value.length === 1) {
+        const nextInput = document.getElementById(nextId);
+        if (nextInput) {
+            nextInput.focus();
+        }
+    }
+}
+
+function handleVerification(e) {
+    e.preventDefault();
+    
+    // Collect all code digits
+    let code = '';
+    for (let i = 1; i <= 6; i++) {
+        code += document.getElementById('code' + i).value;
+    }
+    
+    const email = document.getElementById('verify-email-display').textContent;
+    const verificationData = db.verificationCodes[email];
+    
+    if (!verificationData || verificationData.code !== code) {
+        showNotification('Invalid verification code!', 'error');
+        return;
+    }
+    
+    if (Date.now() > verificationData.expires) {
+        showNotification('Verification code has expired!', 'error');
+        return;
+    }
+    
+    // Complete registration
+    if (pendingRegistration) {
+        pendingRegistration.verified = true;
+        db.users.push(pendingRegistration);
+        pendingRegistration = null;
+    }
+    
+    // Clean up verification code
+    delete db.verificationCodes[email];
+    
+    // Show success and redirect to login
+    showSuccessPage('
