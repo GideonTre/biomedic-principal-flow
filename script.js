@@ -1,154 +1,112 @@
 // ============================================
 // TDBE 1:2 2025/2026 - COMPLETE JAVASCRIPT
-// Full Functional LMS for Students & Teachers
+// Full Functional LMS - Open Access Version
 // ============================================
 
-// Base URL for file downloads
+// Base URL for downloads
 const BASE_URL = 'https://gideontre.github.io/biomedic-principal-flow/downloads/';
 
 // ============================================
-// MOCK DATABASE
+// DATA
 // ============================================
+
 const db = {
-    users: [
-        { 
-            id: 1, 
-            email: 'student@gmail.com', 
-            password: '123', 
-            role: 'student', 
-            name: 'Gideon Tre', 
-            studentId: 'TDBE/2025/001',
-            enrolledClasses: [1, 2, 3, 4, 5, 6, 7],
-            attendance: 98,
-            verified: true,
-            avatar: null,
-            createdAt: '2025-09-01'
-        },
-        { 
-            id: 2, 
-            email: 'teacher@gmail.com', 
-            password: '123', 
-            role: 'teacher', 
-            name: 'Dr. Smith',
-            department: 'Biomedical Engineering',
-            verified: true,
-            createdAt: '2025-01-01'
-        },
-        { 
-            id: 3, 
-            email: 'admin@gmail.com', 
-            password: 'admin', 
-            role: 'admin', 
-            name: 'Administrator',
-            verified: true,
-            createdAt: '2025-01-01'
-        }
-    ],
     classes: [
-        { id: 1, name: 'Hospital Information System and Management', code: 'HIS 301', description: 'Learn about healthcare IT systems, hospital management software, health informatics, and electronic health records.', teacher: 'Dr. Smith', credits: 3, schedule: 'Mon, Wed, Fri - 8:00 AM' },
-        { id: 2, name: 'Biomedical Sensors and Measurement Devices', code: 'BMD 302', description: 'Study of biosensors, transducers, medical measurement equipment, and signal acquisition systems.', teacher: 'Prof. Johnson', credits: 4, schedule: 'Tue, Thu - 10:00 AM' },
-        { id: 3, name: 'Biomedical Signals and Systems', code: 'BSS 303', description: 'Analysis of biological signals, ECG, EEG, signal processing, and system modeling.', teacher: 'Dr. Williams', credits: 3, schedule: 'Mon, Wed - 10:00 AM' },
-        { id: 4, name: 'Troubleshooting of Medical Electronics', code: 'TME 304', description: 'Diagnostic techniques, repair procedures, and maintenance of medical electronic equipment.', teacher: 'Eng. Brown', credits: 3, schedule: 'Fri - 2:00 PM' },
-        { id: 5, name: 'Electronic Circuits and Devices', code: 'ECD 305', description: 'Fundamentals of electronic circuits, amplifiers, semiconductor devices, and circuit design.', teacher: 'Prof. Davis', credits: 4, schedule: 'Tue, Thu - 8:00 AM' },
-        { id: 6, name: 'Medical Imaging Techniques', code: 'MIT 306', description: 'X-ray, CT, MRI, ultrasound, PET scans, and other medical imaging modalities.', teacher: 'Dr. Miller', credits: 3, schedule: 'Wed, Fri - 10:00 AM' },
-        { id: 7, name: 'Multi Disciplinary Design Project I / Real life Project II', code: 'MDP 307', description: 'Capstone project combining biomedical engineering principles with real-world applications.', teacher: 'Dr. Wilson', credits: 6, schedule: 'Mon-Fri - Project Work' }
+        { id: 1, code: 'HIS 301', name: 'Hospital Information System and Management', teacher: 'Dr. Smith', schedule: 'Mon, Wed, Fri - 8:00 AM', materials: 3 },
+        { id: 2, code: 'BMD 302', name: 'Biomedical Sensors and Measurement Devices', teacher: 'Prof. Johnson', schedule: 'Tue, Thu - 10:00 AM', materials: 3 },
+        { id: 3, code: 'BSS 303', name: 'Biomedical Signals and Systems', teacher: 'Dr. Williams', schedule: 'Mon, Wed - 10:00 AM', materials: 2 },
+        { id: 4, code: 'TME 304', name: 'Troubleshooting of Medical Electronics', teacher: 'Eng. Brown', schedule: 'Fri - 2:00 PM', materials: 2 },
+        { id: 5, code: 'ECD 305', name: 'Electronic Circuits and Devices', teacher: 'Prof. Davis', schedule: 'Tue, Thu - 8:00 AM', materials: 2 },
+        { id: 6, code: 'MIT 306', name: 'Medical Imaging Techniques', teacher: 'Dr. Miller', schedule: 'Wed, Fri - 10:00 AM', materials: 3 },
+        { id: 7, code: 'MDP 307', name: 'Multi Disciplinary Design Project I / Real life Project II', teacher: 'Dr. Wilson', schedule: 'Mon-Fri - Project Work', materials: 3 }
     ],
     materials: [
-        { id: 1, classId: 1, title: 'Introduction to Hospital Information Systems', type: 'PDF', size: '2.4 MB', date: '2026-01-15', fileUrl: 'HIS-Introduction.pdf', downloads: 45 },
-        { id: 2, classId: 1, title: 'Health Informatics Fundamentals', type: 'PDF', size: '3.1 MB', date: '2026-01-18', fileUrl: 'Health-Informatics.pdf', downloads: 32 },
-        { id: 3, classId: 2, title: 'Biosensors - Principles and Applications', type: 'PDF', size: '4.2 MB', date: '2026-01-10', fileUrl: 'Biosensors-Principles.pdf', downloads: 67 },
-        { id: 4, classId: 2, title: 'Transducers in Medical Devices', type: 'PPTX', size: '8.5 MB', date: '2026-01-22', fileUrl: 'Transducers-Presentation.pptx', downloads: 89 },
-        { id: 5, classId: 3, title: 'ECG Signal Processing Tutorial', type: 'PDF', size: '5.8 MB', date: '2026-01-12', fileUrl: 'ECG-Processing-Tutorial.pdf', downloads: 74 },
-        { id: 6, classId: 4, title: 'Troubleshooting Medical Equipment Guide', type: 'PDF', size: '6.2 MB', date: '2026-01-14', fileUrl: 'Troubleshooting-Guide.pdf', downloads: 90 },
-        { id: 7, classId: 5, title: 'Amplifier Circuits - Lecture Notes', type: 'PDF', size: '3.5 MB', date: '2026-01-16', fileUrl: 'Amplifier-Circuits.pdf', downloads: 78 },
-        { id: 8, classId: 6, title: 'Principles of X-Ray Imaging', type: 'PDF', size: '4.8 MB', date: '2026-01-11', fileUrl: 'X-Ray-Principles.pdf', downloads: 82 },
-        { id: 9, classId: 7, title: 'Project Guidelines and Requirements', type: 'PDF', size: '1.8 MB', date: '2026-01-08', fileUrl: 'Project-Guidelines.pdf', downloads: 95 }
+        { id: 1, classId: 1, code: 'HIS 301', title: 'Introduction to Hospital Information Systems', type: 'PDF', size: '2.4 MB', date: '2026-01-15', content: 'This PDF covers the fundamentals of Hospital Information Systems including:\n\n• Overview of HIS\n• Electronic Health Records\n• Hospital Management Software\n• Health Informatics' },
+        { id: 2, classId: 1, code: 'HIS 301', title: 'Health Informatics Fundamentals', type: 'PDF', size: '3.1 MB', date: '2026-01-18', content: 'This document covers:\n\n• Health Information Systems\n• Data Management in Healthcare\n• Privacy and Security\n• Interoperability Standards' },
+        { id: 3, classId: 1, code: 'HIS 301', title: 'Hospital Management Software Demo', type: 'Video', size: '150 MB', date: '2026-01-20', content: 'Video demonstration of hospital management software features.' },
+        { id: 4, classId: 2, code: 'BMD 302', title: 'Biosensors - Principles and Applications', type: 'PDF', size: '4.2 MB', date: '2026-01-10', content: 'This PDF covers:\n\n• Types of Biosensors\n• Working Principles\n• Medical Applications\n• Signal Transduction' },
+        { id: 5, classId: 2, code: 'BMD 302', title: 'Transducers in Medical Devices', type: 'PPTX', size: '8.5 MB', date: '2026-01-22', content: 'Presentation on transducers used in medical devices.' },
+        { id: 6, classId: 2, code: 'BMD 302', title: 'Lab: Pulse Oximeter Construction', type: 'DOCX', size: '1.2 MB', date: '2026-01-25', content: 'Laboratory guide for building a pulse oximeter.' },
+        { id: 7, classId: 3, code: 'BSS 303', title: 'ECG Signal Processing Tutorial', type: 'PDF', size: '5.8 MB', date: '2026-01-12', content: 'Complete guide to ECG signal processing techniques.' },
+        { id: 8, classId: 3, code: 'BSS 303', title: 'MATLAB Exercises for Signal Analysis', type: 'ZIP', size: '12 MB', date: '2026-01-19', content: 'MATLAB exercises and code for biomedical signal analysis.' },
+        { id: 9, classId: 4, code: 'TME 304', title: 'Troubleshooting Medical Equipment Guide', type: 'PDF', size: '6.2 MB', date: '2026-01-14', content: 'Comprehensive troubleshooting guide for medical electronics.' },
+        { id: 10, classId: 4, code: 'TME 304', title: 'Safety Standards in Medical Electronics', type: 'PDF', size: '2.8 MB', date: '2026-01-21', content: 'IEC safety standards for medical electrical equipment.' },
+        { id: 11, classId: 5, code: 'ECD 305', title: 'Amplifier Circuits - Lecture Notes', type: 'PDF', size: '3.5 MB', date: '2026-01-16', content: 'Detailed notes on amplifier circuit design.' },
+        { id: 12, classId: 5, code: 'ECD 305', title: 'Semiconductor Devices Overview', type: 'PPTX', size: '4.1 MB', date: '2026-01-23', content: 'Presentation on semiconductor devices and their applications.' },
+        { id: 13, classId: 6, code: 'MIT 306', title: 'Principles of X-Ray Imaging', type: 'PDF', size: '4.8 MB', date: '2026-01-11', content: 'Physics and principles of X-ray imaging technology.' },
+        { id: 14, classId: 6, code: 'MIT 306', title: 'MRI Physics and Applications', type: 'PDF', size: '6.5 MB', date: '2026-01-24', content: 'Comprehensive guide to MRI physics and clinical applications.' },
+        { id: 15, classId: 6, code: 'MIT 306', title: 'Ultrasound Imaging Techniques', type: 'Video', size: '200 MB', date: '2026-01-26', content: 'Video lecture on ultrasound imaging techniques.' },
+        { id: 16, classId: 7, code: 'MDP 307', title: 'Project Guidelines and Requirements', type: 'PDF', size: '1.8 MB', date: '2026-01-08', content: 'Complete guidelines for the capstone project.' },
+        { id: 17, classId: 7, code: 'MDP 307', title: 'Project Proposal Template', type: 'DOCX', size: '450 KB', date: '2026-01-09', content: 'Template for writing your project proposal.' },
+        { id: 18, classId: 7, code: 'MDP 307', title: 'Previous Year Projects Showcase', type: 'PDF', size: '15 MB', date: '2026-01-10', content: 'Examples of previous capstone projects.' }
     ],
     results: [
-        { id: 1, subject: 'Hospital Information System', assignment: 'Midterm Examination', score: 85, grade: 'B+', comment: 'Excellent understanding of health informatics concepts!' },
-        { id: 2, subject: 'Biomedical Sensors', assignment: 'Lab Report 1', score: 92, grade: 'A', comment: 'Outstanding sensor calibration analysis.' },
-        { id: 3, subject: 'Biomedical Signals', assignment: 'Signal Processing Project', score: 78, grade: 'C+', comment: 'Good work, but MATLAB implementation needs improvement.' },
-        { id: 4, subject: 'Medical Electronics', assignment: 'Troubleshooting Assessment', score: 88, grade: 'A-', comment: 'Strong diagnostic skills demonstrated.' },
-        { id: 5, subject: 'Electronic Circuits', assignment: 'Circuit Design Quiz', score: 95, grade: 'A', comment: 'Perfect score! Excellent circuit analysis.' },
-        { id: 6, subject: 'Medical Imaging', assignment: 'Imaging Modalities Test', score: 90, grade: 'A-', comment: 'Thorough understanding of imaging principles.' },
-        { id: 7, subject: 'Capstone Project', assignment: 'Project Proposal', score: 86, grade: 'B+', comment: 'Solid proposal with clear objectives.' }
+        { subject: 'Hospital Information System', assignment: 'Midterm Examination', score: 85, grade: 'B+', comment: 'Excellent understanding of health informatics concepts!' },
+        { subject: 'Biomedical Sensors', assignment: 'Lab Report 1', score: 92, grade: 'A', comment: 'Outstanding sensor calibration analysis.' },
+        { subject: 'Biomedical Signals', assignment: 'Signal Processing Project', score: 78, grade: 'C+', comment: 'Good work, but MATLAB implementation needs improvement.' },
+        { subject: 'Medical Electronics', assignment: 'Troubleshooting Assessment', score: 88, grade: 'A-', comment: 'Strong diagnostic skills demonstrated.' },
+        { subject: 'Electronic Circuits', assignment: 'Circuit Design Quiz', score: 95, grade: 'A', comment: 'Perfect score! Excellent circuit analysis.' },
+        { subject: 'Medical Imaging', assignment: 'Imaging Modalities Test', score: 90, grade: 'A-', comment: 'Thorough understanding of imaging principles.' },
+        { subject: 'Capstone Project', assignment: 'Project Proposal', score: 86, grade: 'B+', comment: 'Solid proposal with clear objectives.' }
     ],
     assignments: [
-        { id: 1, classId: 1, title: 'Hospital System Analysis', description: 'Analyze a hospital information system and create a report', dueDate: '2026-02-15', status: 'pending', submitted: false },
-        { id: 2, classId: 2, title: 'Sensor Design Project', description: 'Design a biosensor for glucose monitoring', dueDate: '2026-02-20', status: 'pending', submitted: false },
-        { id: 3, classId: 3, title: 'ECG Analysis Report', description: 'Analyze ECG signals and identify abnormalities', dueDate: '2026-02-10', status: 'submitted', submittedDate: '2026-02-08' }
+        { title: 'Hospital System Analysis', course: 'HIS 301', description: 'Analyze a hospital information system and create a report', dueDate: '2026-02-15', status: 'pending' },
+        { title: 'Sensor Design Project', course: 'BMD 302', description: 'Design a biosensor for glucose monitoring', dueDate: '2026-02-20', status: 'pending' },
+        { title: 'ECG Analysis Report', course: 'BSS 303', description: 'Analyze ECG signals and identify abnormalities', dueDate: '2026-02-10', status: 'submitted' }
     ],
     announcements: [
-        { id: 1, title: 'Welcome to TDBE 1:2 2025/2026', content: 'Access all your learning materials and track your progress here.', date: '2026-01-26', type: 'urgent' },
-        { id: 2, title: 'Exam Schedule Released', content: 'Midterm examination schedule has been posted. Check your email for details.', date: '2026-01-25', type: 'info' },
-        { id: 3, title: 'New Materials Uploaded', content: 'Week 3 lecture notes have been uploaded to the Materials section.', date: '2026-01-24', type: 'success' }
+        { title: 'Welcome to TDBE 1:2 2025/2026', content: 'Access all your learning materials and track your progress here.', date: 'Just now', type: 'urgent' },
+        { title: 'Exam Schedule Released', content: 'Midterm examination schedule has been posted.', date: '1 day ago', type: 'info' },
+        { title: 'New Materials Uploaded', content: 'Week 3 lecture notes have been uploaded.', date: '2 days ago', type: 'success' }
     ],
     forum: [
-        { id: 1, user: 'Dr. Smith', avatar: '👨‍🏫', content: 'Welcome to the discussion forum! Feel free to ask questions about Hospital Information Systems.', date: '2026-01-26', replies: 5 },
-        { id: 2, user: 'John Doe', avatar: '👨‍🎓', content: 'Can someone explain the difference between HIS and EMR systems?', date: '2026-01-25', replies: 3 }
+        { user: 'Dr. Smith', avatar: '👨‍🏫', content: 'Welcome to the discussion forum! Feel free to ask questions about Hospital Information Systems.', date: '2026-01-26', replies: 5 },
+        { user: 'Student A', avatar: '👨‍🎓', content: 'Can someone explain the difference between HIS and EMR systems?', date: '2026-01-25', replies: 3 }
     ],
-    verificationCodes: {},
-    passwordResetTokens: {}
+    profile: {
+        name: 'Gideon Tre',
+        email: 'student@gmail.com',
+        role: 'Student',
+        id: 'TDBE/2025/001',
+        avatar: null
+    }
 };
-
-// ============================================
-// GLOBAL VARIABLES
-// ============================================
-let currentUser = null;
-let pendingRegistration = null;
-let selectedFile = null;
 
 // ============================================
 // INITIALIZATION
 // ============================================
+
 document.addEventListener('DOMContentLoaded', function() {
-    checkSavedSession();
-    setupAllForms();
+    loadDashboard();
+    loadMaterials();
+    loadResults();
+    loadSchedule();
+    loadAssignments();
+    loadForum();
+    loadProfile();
+    populateAdminSelects();
 });
-
-function checkSavedSession() {
-    const savedUser = localStorage.getItem('tdbe_currentUser');
-    if (savedUser) {
-        currentUser = JSON.parse(savedUser);
-        if (currentUser.verified) {
-            loginSuccess();
-        } else {
-            currentUser = null;
-            localStorage.removeItem('tdbe_currentUser');
-        }
-    }
-}
-
-function setupAllForms() {
-    // Login form
-    document.getElementById('login-form').addEventListener('submit', handleLogin);
-    
-    // Register form
-    document.getElementById('register-form').addEventListener('submit', handleRegister);
-    
-    // Verify form
-    document.getElementById('verify-form').addEventListener('submit', handleVerification);
-    
-    // Forgot password form
-    document.getElementById('forgot-form').addEventListener('submit', handleForgotPassword);
-    
-    // Reset password form
-    document.getElementById('reset-form').addEventListener('submit', handleResetPassword);
-}
 
 // ============================================
 // NAVIGATION
 // ============================================
+
 function showPage(pageId) {
+    // Hide all pages
     document.querySelectorAll('.page').forEach(page => {
         page.classList.remove('active');
         page.classList.add('hidden');
     });
+    
+    // Show target page
     const targetPage = document.getElementById(pageId + '-page');
     if (targetPage) {
         targetPage.classList.remove('hidden');
         targetPage.classList.add('active');
     }
+    
+    // Scroll to top
+    window.scrollTo(0, 0);
 }
 
 function toggleNavbar() {
@@ -157,224 +115,148 @@ function toggleNavbar() {
 
 function toggleMobileMenu() {
     const navLinks = document.getElementById('navLinks');
-    navLinks.style.display = navLinks.style.display === 'flex' ? 'none' : 'flex';
-}
-
-function toggleDarkMode() {
-    document.body.classList.toggle('dark-mode');
-}
-
-function togglePassword(fieldId) {
-    const field = document.getElementById(fieldId);
-    field.type = field.type === 'password' ? 'text' : 'password';
-}
-
-// ============================================
-// LOGIN
-// ============================================
-function handleLogin(e) {
-    e.preventDefault();
-    
-    const email = document.getElementById('login-email').value.trim().toLowerCase();
-    const password = document.getElementById('login-password').value;
-    
-    // Find user
-    const user = db.users.find(u => u.email.toLowerCase() === email && u.password === password);
-    
-    if (user) {
-        if (!user.verified) {
-            showVerificationPage(email);
-            showNotification('Please verify your email first!', 'warning');
-            return;
-        }
-        
-        currentUser = user;
-        
-        if (document.getElementById('remember-me').checked) {
-            localStorage.setItem('tdbe_currentUser', JSON.stringify(user));
-        }
-        
-        loginSuccess();
-        showNotification(`Welcome back, ${user.name}!`, 'success');
+    if (navLinks.style.display === 'flex') {
+        navLinks.style.display = 'none';
     } else {
-        showNotification('Invalid email or password!', 'error');
+        navLinks.style.display = 'flex';
+        navLinks.style.flexDirection = 'column';
+        navLinks.style.position = 'absolute';
+        navLinks.style.top = '70px';
+        navLinks.style.left = '0';
+        navLinks.style.right = '0';
+        navLinks.style.background = 'white';
+        navLinks.style.padding = '20px';
+        navLinks.style.boxShadow = '0 4px 15px rgba(0,0,0,0.1)';
     }
-}
-
-function loginSuccess() {
-    // Hide auth pages
-    document.querySelectorAll('#login-page, #register-page, #verify-page, #forgot-password-page, #reset-password-page').forEach(p => {
-        p.classList.remove('active');
-        p.classList.add('hidden');
-    });
-    
-    // Show navbar and dashboard
-    document.getElementById('navbar').classList.remove('hidden');
-    
-    if (currentUser.role === 'teacher' || currentUser.role === 'admin') {
-        document.getElementById('adminLink').classList.remove('hidden');
-    }
-    
-    // Redirect based on role
-    if (currentUser.role === 'teacher' || currentUser.role === 'admin') {
-        showPage('admin');
-    } else {
-        showPage('dashboard');
-    }
-    
-    // Load all data
-    loadAllData();
-}
-
-function logout() {
-    currentUser = null;
-    localStorage.removeItem('tdbe_currentUser');
-    
-    // Reset UI
-    document.querySelectorAll('.page').forEach(page => {
-        page.classList.remove('active');
-        page.classList.add('hidden');
-    });
-    
-    // Show login page
-    document.getElementById('login-page').classList.remove('hidden');
-    document.getElementById('login-page').classList.add('active');
-    document.getElementById('navbar').classList.add('hidden');
-    document.getElementById('adminLink').classList.add('hidden');
-    
-    // Clear forms
-    document.getElementById('login-form').reset();
-    
-    showNotification('You have been logged out.', 'info');
 }
 
 // ============================================
-// REGISTRATION
+// DASHBOARD
 // ============================================
-function handleRegister(e) {
-    e.preventDefault();
+
+function loadDashboard() {
+    // Update stats
+    document.getElementById('stat-classes').textContent = db.classes.length;
+    document.getElementById('stat-materials').textContent = db.materials.length;
     
-    const name = document.getElementById('reg-name').value.trim();
-    const email = document.getElementById('reg-email').value.trim().toLowerCase();
-    const password = document.getElementById('reg-password').value;
-    const confirmPassword = document.getElementById('reg-confirm').value;
-    const role = document.getElementById('reg-role').value;
+    // Calculate average
+    const scores = db.results.map(r => r.score);
+    const avg = Math.round(scores.reduce((a, b) => a + b, 0) / scores.length);
+    document.getElementById('stat-score').textContent = avg + '%';
+    document.getElementById('overall-progress').style.width = avg + '%';
+    document.getElementById('progress-text').textContent = 'Overall Performance: ' + avg + '%';
     
-    // Validation
-    if (password !== confirmPassword) {
-        showNotification('Passwords do not match!', 'error');
-        return;
+    // Calculate GPA
+    const gpa = calculateGPA();
+    document.getElementById('gpa-value').textContent = gpa.toFixed(2);
+    
+    // Load recent materials
+    const materialsList = document.getElementById('dash-materials-list');
+    if (materialsList) {
+        materialsList.innerHTML = '';
+        db.materials.slice(0, 5).forEach(m => {
+            const li = document.createElement('li');
+            li.innerHTML = '<span>' + m.title + '</span><span class="file-type">' + m.type + '</span>';
+            materialsList.appendChild(li);
+        });
     }
-    
-    if (!email.endsWith('@gmail.com')) {
-        showNotification('Please use a valid Gmail address!', 'error');
-        return;
-    }
-    
-    // Check if email exists
-    if (db.users.find(u => u.email.toLowerCase() === email)) {
-        showNotification('This email is already registered!', 'error');
-        return;
-    }
-    
-    // Store pending registration
-    pendingRegistration = {
-        name,
-        email,
-        password,
-        role,
-        verified: false
-    };
-    
-    // Generate verification code
-    const code = generateVerificationCode();
-    db.verificationCodes[email] = {
-        code: code,
-        expires: Date.now() + 10 * 60 * 1000 // 10 minutes
-    };
-    
-    // Simulate sending email
-    simulateEmailSend(email, code, 'verification');
-    
-    // Show verification page
-    showVerificationPage(email);
-    showNotification('Registration successful! Please verify your email.', 'success');
 }
 
-function showVerificationPage(email) {
-    document.getElementById('verify-email-display').textContent = email;
-    document.getElementById('login-page').classList.remove('active');
-    document.getElementById('register-page').classList.remove('active');
-    document.getElementById('verify-page').classList.remove('hidden');
-    document.getElementById('verify-page').classList.add('active');
-    
-    // Clear previous code inputs
-    document.querySelectorAll('.code-input').forEach(input => {
-        input.value = '';
+function calculateGPA() {
+    const gradePoints = { 'A': 4.0, 'A-': 3.7, 'B+': 3.3, 'B': 3.0, 'B-': 2.7, 'C+': 2.3, 'C': 2.0, 'C-': 1.7, 'D': 1.0, 'F': 0.0 };
+    let total = 0;
+    db.results.forEach(r => {
+        total += gradePoints[r.grade] || 0;
     });
-    document.getElementById('code1').focus();
+    return total / db.results.length;
 }
 
-function generateVerificationCode() {
-    return Math.floor(100000 + Math.random() * 900000).toString();
+// ============================================
+// MATERIALS
+// ============================================
+
+function loadMaterials() {
+    const container = document.getElementById('materials-container');
+    if (!container) return;
+    
+    container.innerHTML = '';
+    
+    db.materials.forEach(m => {
+        const item = document.createElement('div');
+        item.className = 'material-item';
+        
+        const icon = getFileIcon(m.type);
+        
+        item.innerHTML = '<div class="material-icon">' + icon + '</div>' +
+            '<div class="material-info">' +
+            '<h4>' + m.title + '</h4>' +
+            '<p>' + m.code + ' • ' + m.type + ' • ' + m.size + ' • ' + m.date + '</p>' +
+            '</div>' +
+            '<div class="material-actions">' +
+            '<button class="btn-primary" onclick="downloadMaterial(\'' + m.title + '\', \'' + m.type + '\')"><i class="fas fa-download"></i> Download</button>' +
+            '<button class="btn-secondary" onclick="viewMaterial(\'' + m.title + '\', \'' + icon + '\', \`' + m.content + '\`)"><i class="fas fa-eye"></i> View</button>' +
+            '</div>';
+        
+        container.appendChild(item);
+    });
 }
 
-function simulateEmailSend(email, code, type) {
-    // In a real application, this would send an actual email
-    // For demo purposes, we'll show the code in a notification
-    if (type === 'verification') {
-        showNotification(`📧 Verification code sent to ${email}`, 'success');
-        setTimeout(() => {
-            showNotification(`🔑 Your verification code is: ${code}`, 'info');
-        }, 2000);
-    } else if (type === 'passwordReset') {
-        showNotification(`📧 Password reset code sent to ${email}`, 'success');
-        setTimeout(() => {
-            showNotification(`🔑 Your reset code is: ${code}`, 'info');
-        }, 2000);
-    }
+function getFileIcon(type) {
+    const icons = {
+        'PDF': '📄',
+        'DOCX': '📝',
+        'PPTX': '📊',
+        'Video': '🎬',
+        'ZIP': '📦'
+    };
+    return icons[type] || '📁';
 }
 
-function moveToNext(current, nextId) {
-    if (current.value.length === 1) {
-        const nextInput = document.getElementById(nextId);
-        if (nextInput) {
-            nextInput.focus();
+function filterMaterials() {
+    const searchTerm = document.getElementById('search-material').value.toLowerCase();
+    const items = document.querySelectorAll('.material-item');
+    
+    items.forEach(item => {
+        const title = item.querySelector('h4').textContent.toLowerCase();
+        if (title.includes(searchTerm)) {
+            item.style.display = 'flex';
+        } else {
+            item.style.display = 'none';
         }
-    }
+    });
 }
 
-function handleVerification(e) {
-    e.preventDefault();
+function downloadMaterial(title, type) {
+    showNotification('📥 Downloading: ' + title, 'success');
     
-    // Collect all code digits
-    let code = '';
-    for (let i = 1; i <= 6; i++) {
-        code += document.getElementById('code' + i).value;
-    }
+    setTimeout(function() {
+        alert('Download started for: ' + title + '\n\nFile type: ' + type + '\n\nIn a live website, the actual file would download now.\n\nTo make this work for real:\n1. Upload your files to a "downloads" folder\n2. Add the file URLs to the JavaScript database');
+    }, 1000);
+}
+
+function viewMaterial(title, icon, content) {
+    const modal = document.createElement('div');
+    modal.className = 'modal';
+    modal.innerHTML = '<div class="modal-content">' +
+        '<div class="modal-header">' +
+        '<h3>' + icon + ' ' + title + '</h3>' +
+        '<button onclick="closeModal()">×</button>' +
+        '</div>' +
+        '<div class="modal-body">' +
+        '<pre style="white-space: pre-wrap; font-family: inherit; line-height: 1.8;">' + content + '</pre>' +
+        '</div>' +
+        '<div class="modal-footer">' +
+        '<button class="btn-primary" onclick="closeModal()">Close</button>' +
+        '</div>' +
+        '</div>';
     
-    const email = document.getElementById('verify-email-display').textContent;
-    const verificationData = db.verificationCodes[email];
+    document.body.appendChild(modal);
     
-    if (!verificationData || verificationData.code !== code) {
-        showNotification('Invalid verification code!', 'error');
-        return;
-    }
-    
-    if (Date.now() > verificationData.expires) {
-        showNotification('Verification code has expired!', 'error');
-        return;
-    }
-    
-    // Complete registration
-    if (pendingRegistration) {
-        pendingRegistration.verified = true;
-        db.users.push(pendingRegistration);
-        pendingRegistration = null;
-    }
-    
-    // Clean up verification code
-    delete db.verificationCodes[email];
-    
-    // Show success and redirect to login
-    showSuccessPage('
+    // Style the modal
+    modal.style.cssText = 'position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,0.5);display:flex;align-items:center;justify-content:center;z-index:10000;';
+    const content = modal.querySelector('.modal-content');
+    content.style.cssText = 'background:white;padding:2rem;border-radius:12px;max-width:600px;width:90%;max-height:80vh;overflow-y:auto;';
+    modal.querySelector('.modal-header').style.cssText = 'display:flex;justify-content:space-between;align-items:center;margin-bottom:1rem;';
+    modal.querySelector('.modal-header button').style.cssText = 'background:none;border:none;font-size:1.5rem;cursor:pointer;';
+    modal.querySelector('.modal-body').style.cssText = 'margin-bottom:1rem;';
+    modal.querySelector

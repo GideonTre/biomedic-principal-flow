@@ -1,0 +1,47 @@
+# ============================================
+# Robots.txt for TDBE 1:2 2025/2026
+# Biomedical Engineering Learning Portal
+# ============================================
+
+# Allow all search engines to crawl your website
+User-agent: *
+Allow: /
+
+# Disallow admin/private areas (if you add them later)
+Disallow: /admin/
+Disallow: /api/
+Disallow: /private/
+
+# Sitemap location
+Sitemap: https://gideontre.github.io/biomedic-principal-flow/sitemap.xml
+
+# Crawl-delay (optional - remove if you want faster crawling)
+# Crawl-delay: 10
+
+# ============================================
+# Specific Bot Rules
+# ============================================
+
+# Googlebot
+User-agent: Googlebot
+Allow: /
+
+# Bingbot
+User-agent: Bingbot
+Allow: /
+
+# Yahoo Slurp
+User-agent: Yahoo! Slurp
+Allow: /
+
+# DuckDuckBot
+User-agent: DuckDuckBot
+Allow: /
+
+# Baiduspider
+User-agent: Baiduspider
+Allow: /
+
+# Yandex
+User-agent: Yandex
+Allow: /

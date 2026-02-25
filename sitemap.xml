@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-   
-   <!-- Main Page -->
+   <!-- Main Website URL -->
    <url>
       <loc>https://gideontre.github.io/biomedic-principal-flow/</loc>
       <lastmod>2026-01-26</lastmod>
@@ -9,19 +8,11 @@
       <priority>1.0</priority>
    </url>
    
-   <!-- Login Page -->
-   <url>
-      <loc>https://gideontre.github.io/biomedic-principal-flow/#login</loc>
-      <lastmod>2026-01-26</lastmod>
-      <changefreq>monthly</changefreq>
-      <priority>0.9</priority>
-   </url>
-   
    <!-- Dashboard Page -->
    <url>
       <loc>https://gideontre.github.io/biomedic-principal-flow/#dashboard</loc>
       <lastmod>2026-01-26</lastmod>
-      <changefreq>weekly</changefreq>
+      <changefreq>daily</changefreq>
       <priority>0.9</priority>
    </url>
    
@@ -30,7 +21,7 @@
       <loc>https://gideontre.github.io/biomedic-principal-flow/#classes</loc>
       <lastmod>2026-01-26</lastmod>
       <changefreq>weekly</changefreq>
-      <priority>0.8</priority>
+      <priority>0.9</priority>
    </url>
    
    <!-- Materials Page -->
@@ -81,51 +72,11 @@
       <priority>0.6</priority>
    </url>
    
-   <!-- Admin Panel -->
+   <!-- Admin Page -->
    <url>
       <loc>https://gideontre.github.io/biomedic-principal-flow/#admin</loc>
       <lastmod>2026-01-26</lastmod>
       <changefreq>weekly</changefreq>
       <priority>0.6</priority>
    </url>
-   
-   <!-- Individual Class Pages -->
-   <url>
-      <loc>https://gideontre.github.io/biomedic-principal-flow/#class-1</loc>
-      <lastmod>2026-01-26</lastmod>
-      <changefreq>monthly</changefreq>
-      <priority>0.7</priority>
-   </url>
-   <url>
-      <loc>https://gideontre.github.io/biomedic-principal-flow/#class-2</loc>
-      <lastmod>2026-01-26</lastmod>
-      <changefreq>monthly</changefreq>
-      <priority>0.7</priority>
-   </url>
-   <url>
-      <loc>https://gideontre.github.io/biomedic-principal-flow/#class-3</loc>
-      <lastmod>2026-01-26</lastmod>
-      <changefreq>monthly</changefreq>
-      <priority>0.7</priority>
-   </url>
-   <url>
-      <loc>https://gideontre.github.io/biomedic-principal-flow/#class-4</loc>
-      <lastmod>2026-01-26</lastmod>
-      <changefreq>monthly</changefreq>
-      <priority>0.7</priority>
-   </url>
-   <url>
-      <loc>https://gideontre.github.io/biomedic-principal-flow/#class-5</loc>
-      <lastmod>2026-01-26</lastmod>
-      <changefreq>monthly</changefreq>
-      <priority>0.7</priority>
-   </url>
-   <url>
-      <loc>https://gideontre.github.io/biomedic-principal-flow/#class-6</loc>
-      <lastmod>2026-01-26</lastmod>
-      <changefreq>monthly</changefreq>
-      <priority>0.7</priority>
-   </url>
-   <url>
-      <loc>https://gideontre.github.io/biomedic-principal-flow/#class-7</loc>
-      <lastmod>202
+</urlset>
