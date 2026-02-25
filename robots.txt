@@ -7,7 +7,7 @@
 User-agent: *
 Allow: /
 
-# Disallow admin/private areas (if you add them later)
+# Disallow admin areas (for future use)
 Disallow: /admin/
 Disallow: /api/
 Disallow: /private/
@@ -15,30 +15,30 @@ Disallow: /private/
 # Sitemap location
 Sitemap: https://gideontre.github.io/biomedic-principal-flow/sitemap.xml
 
-# Crawl-delay (optional - remove if you want faster crawling)
-# Crawl-delay: 10
+# Crawl delay (optional)
+Crawl-delay: 10
 
 # ============================================
-# Specific Bot Rules
+# Specific Search Engine Bots
 # ============================================
 
-# Googlebot
+# Google
 User-agent: Googlebot
 Allow: /
 
-# Bingbot
+# Bing
 User-agent: Bingbot
 Allow: /
 
-# Yahoo Slurp
+# Yahoo
 User-agent: Yahoo! Slurp
 Allow: /
 
-# DuckDuckBot
+# DuckDuckGo
 User-agent: DuckDuckBot
 Allow: /
 
-# Baiduspider
+# Baidu
 User-agent: Baiduspider
 Allow: /
 
