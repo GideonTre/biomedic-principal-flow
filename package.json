@@ -1,0 +1,16 @@
+{
+  "name": "tdbe-portal-backend",
+  "version": "1.0.0",
+  "description": "TDBE 1:2 2025/2026 Portal Backend with MongoDB",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "express": "^4.18.2",
+    "mongoose": "^8.0.0",
+    "cors": "^2.8.5",
+    "dotenv": "^16.3.1",
+    "multer": "^1.4.5-lts.1"
+  }
+}
