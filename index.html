@@ -1,26 +1,28 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <!-- ================= SEO META TAGS ================= -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TDBE 1:2 2025/2026 - Biomedical Engineering Portal</title>
-    
-    <!-- SEO Meta Tags -->
-    <meta name="description" content="TDBE 1:2 2025/2026 Biomedical Engineering Learning Portal - Access course materials, submit assignments, view announcements, connect with tutors.">
-    <meta name="keywords" content="Biomedical Engineering, TDBE 1:2, Hospital Information System, Biomedical Sensors, Medical Electronics, Medical Imaging, Learning Management System, University">
-    <meta name="author" content="TDBE 1:2 2025/2026">
+    <meta name="description" content="TDBE 1:2 2025/2026 Biomedical Engineering Classroom Portal - Announcements, Assignments, Course Materials, Syllabus, Submissions and Learning Resources.">
+    <meta name="keywords" content="TDBE 1:2 2025/2026, Biomedical Engineering, Hospital Management, Medical Electronics, Signals and Systems, Biomedical Sensors, Medical Imaging, Classroom Portal, Assignments, Course Work, University">
+    <meta name="author" content="TDBE 1:2 2025/2026 - Biomedical Engineering Department">
     <meta name="robots" content="index, follow">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    
-    <!-- Open Graph -->
+    <meta name="theme-color" content="#2E7D32">
     <meta property="og:title" content="TDBE 1:2 2025/2026 - Biomedical Engineering Portal">
-    <meta property="og:description" content="Comprehensive learning portal for Biomedical Engineering students">
+    <meta property="og:description" content="Biomedical Engineering Learning Portal - Access materials, submit assignments, view announcements">
     <meta property="og:type" content="website">
+    <meta property="og:url" content="https://gideontre.github.io/biomedic-principal-flow/">
     
+    <title>TDBE 1:2 2025/2026 - Biomedical Engineering Classroom Portal</title>
+
     <!-- Fonts & Icons -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-    
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🏥</text></svg>">
+
     <style>
 /* ============================================ COMPLETE CSS STYLES =========================================== */
 :root{--primary:#2E7D32;--primary-dark:#1B5E20;--primary-light:#4CAF50;--secondary:#1976D2;--accent:#FF9800;--bg:#F8FAF8;--white:#FFFFFF;--text:#1A1A2E;--text-light:#64748B;--border:#E2E8F0;--shadow:0 4px 20px rgba(0,0,0,0.08);--shadow-hover:0 8px 30px rgba(0,0,0,0.12);--radius:16px;--radius-sm:10px;--success:#10B981;--warning:#F59E0B;--danger:#EF4444}
@@ -31,134 +33,1098 @@ a{text-decoration:none;color:inherit}
 ul{list-style:none}
 button{cursor:pointer;font-family:inherit;border:none;outline:none}
 input,select,textarea{font-family:inherit;outline:none}
-nav{background:var(--white);padding:0.8rem 2rem;display:flex;justify-content:space-between;align-items:center;box-shadow:var(--shadow);position:fixed;top:0;left:0;right:0;z-index:1000;border-bottom:3px solid var(--primary)}
-.logo{display:flex;align-items:center;gap:10px;font-weight:800;font-size:1.2rem;color:var(--primary)}
-.logo i{font-size:1.6rem}
-.logo-text{white-space:nowrap}
-.nav-links{display:flex;gap:5px;transition:all 0.3s}
-.nav-links a{display:flex;align-items:center;gap:8px;padding:10px 14px;border-radius:var(--radius-sm);font-weight:500;font-size:0.9rem;color:var(--text);transition:all 0.3s}
+header{background:linear-gradient(135deg,var(--primary),var(--primary-dark));color:white;padding:1.5rem 2rem;text-align:center;position:relative;overflow:hidden}
+header::before{content:'';position:absolute;top:-50%;right:-10%;width:40%;height:200%;background:rgba(255,255,255,0.1);transform:rotate(20deg)}
+header h1{font-size:1.8rem;display:flex;align-items:center;justify-content:center;gap:12px;position:relative;z-index:1}
+header h1 i{font-size:2rem}
+header p{opacity:0.9;margin-top:8px;position:relative;z-index:1}
+nav{background:var(--white);padding:0.8rem 2rem;display:flex;justify-content:space-between;align-items:center;box-shadow:var(--shadow);position:sticky;top:0;z-index:1000;border-bottom:3px solid var(--primary)}
+.logo{display:flex;align-items:center;gap:10px;font-weight:800;font-size:1.1rem;color:var(--primary)}
+.logo i{font-size:1.4rem}
+.nav-links{display:flex;gap:5px;flex-wrap:wrap;justify-content:center}
+.nav-links a{display:flex;align-items:center;gap:6px;padding:8px 12px;border-radius:var(--radius-sm);font-weight:500;font-size:0.85rem;color:var(--text);transition:all 0.3s}
 .nav-links a:hover,.nav-links a.active{background:var(--primary);color:white}
-.nav-right{display:flex;gap:10px;align-items:center}
-.collapse-btn,.mobile-menu-btn{background:var(--bg);padding:10px 14px;border-radius:var(--radius-sm);transition:all 0.3s}
-.collapse-btn:hover,.mobile-menu-btn:hover{background:var(--primary);color:white}
-nav.collapsed{padding:0.5rem 1rem}
-nav.collapsed .logo-text,nav.collapsed .nav-links span{display:none}
-.container{max-width:1400px;margin:0 auto;padding:100px 20px 40px}
-.page{display:none;animation:fadeIn 0.4s ease}
-.page.active{display:block}
-@keyframes fadeIn{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
-.btn-primary{background:linear-gradient(135deg,var(--primary),var(--primary-dark));color:white;padding:14px 28px;border-radius:var(--radius-sm);font-weight:600;display:inline-flex;align-items:center;gap:8px;transition:all 0.3s}
-.btn-primary:hover{transform:translateY(-2px);box-shadow:0 6px 20px rgba(46,125,50,0.4)}
-.btn-secondary{background:linear-gradient(135deg,var(--secondary),#1565C0);color:white;padding:14px 28px;border-radius:var(--radius-sm);font-weight:600;display:inline-flex;align-items:center;gap:8px}
-.btn-danger{background:linear-gradient(135deg,var(--danger),#DC2626);color:white;padding:10px 20px;border-radius:var(--radius-sm);font-weight:500}
-.btn-sm{padding:8px 16px;font-size:0.85rem}
-.btn-link{background:none;color:var(--primary);font-weight:500}
-.btn-link:hover{text-decoration:underline}
-.btn-outline{background:none;border:2px solid var(--primary);color:var(--primary);padding:12px 24px;border-radius:var(--radius-sm);font-weight:600;display:inline-flex;align-items:center;gap:8px}
-.btn-outline:hover{background:var(--primary);color:white}
-.card{background:var(--white);border-radius:var(--radius);box-shadow:var(--shadow);padding:1.5rem;margin-bottom:1.5rem}
-.card-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:1.5rem;padding-bottom:1rem;border-bottom:1px solid var(--border)}
-.card-header h3{display:flex;align-items:center;gap:10px;font-size:1.2rem}
-.card-header h3 i{color:var(--primary)}
+.container{max-width:1200px;margin:0 auto;padding:2rem 20px}
+section{background:var(--white);border-radius:var(--radius);box-shadow:var(--shadow);padding:2rem;margin-bottom:2rem}
+section h2{font-size:1.5rem;margin-bottom:1.5rem;display:flex;align-items:center;gap:12px;color:var(--primary);padding-bottom:1rem;border-bottom:2px solid var(--border)}
+section h2 i{font-size:1.3rem}
 .form-group{margin-bottom:1.2rem}
 .form-group label{display:block;margin-bottom:6px;font-weight:500;font-size:0.9rem}
 .form-group label i{color:var(--primary);margin-right:6px}
 .form-control{width:100%;padding:14px 16px;border:2px solid var(--border);border-radius:var(--radius-sm);font-size:1rem;transition:all 0.3s}
 .form-control:focus{border-color:var(--primary);box-shadow:0 0 0 3px rgba(46,125,50,0.1)}
-textarea.form-control{min-height:120px;resize:vertical}
+textarea.form-control{min-height:100px;resize:vertical}
 select.form-control{cursor:pointer}
-.page-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:2rem;flex-wrap:wrap;gap:1rem}
-.page-header h2{font-size:1.8rem;display:flex;align-items:center;gap:12px}
-.page-header h2 i{color:var(--primary)}
-.page-header p{color:var(--text-light);margin-top:4px}
-.auth-container{display:flex;max-width:1000px;margin:2rem auto;background:var(--white);border-radius:var(--radius);box-shadow:var(--shadow);overflow:hidden}
-.auth-illustration{flex:1;background:linear-gradient(135deg,var(--primary),var(--primary-dark));padding:3rem;color:white;display:flex;align-items:center;justify-content:center}
-.auth-illustration i{font-size:5rem;margin-bottom:1rem}
-.auth-illustration h1{font-size:2rem;margin-bottom:0.5rem}
-.auth-illustration p{opacity:0.9;margin-bottom:1.5rem}
-.auth-features{text-align:left}
-.auth-features div{display:flex;align-items:center;gap:10px;margin:12px 0}
-.auth-form-container{flex:1;padding:3rem}
-.auth-logo{width:80px;height:80px;background:linear-gradient(135deg,var(--primary),var(--primary-light));color:white;font-size:2rem;display:flex;align-items:center;justify-content:center;border-radius:50%;margin:0 auto 1.5rem}
-.auth-header{text-align:center;margin-bottom:2rem}
-.auth-header h2{margin-bottom:8px}
-.auth-header p{color:var(--text-light)}
-.demo-accounts{margin-top:1.5rem;padding:1rem;background:var(--bg);border-radius:var(--radius-sm)}
-.demo-accounts p{font-size:0.85rem;margin-bottom:10px;text-align:center}
-.demo-btns{display:flex;gap:8px;flex-wrap:wrap;justify-content:center}
-.demo-btn{padding:10px 16px;background:var(--white);border:2px solid var(--border);border-radius:var(--radius-sm);font-size:0.85rem;display:flex;align-items:center;justify-content:center;gap:6px;transition:all 0.3s}
-.demo-btn:hover{border-color:var(--primary);background:rgba(46,125,50,0.05)}
-.hero-section{background:linear-gradient(135deg,var(--primary),var(--primary-dark));color:white;padding:3rem;border-radius:var(--radius);margin-bottom:2rem;position:relative;overflow:hidden}
-.hero-section::before{content:'';position:absolute;top:-50%;right:-20%;width:60%;height:200%;background:rgba(255,255,255,0.1);transform:rotate(20deg)}
-.hero-badge{display:inline-block;background:rgba(255,255,255,0.2);padding:6px 16px;border-radius:20px;font-size:0.85rem;margin-bottom:1rem}
-.hero-section h1{font-size:2.2rem;margin-bottom:1rem}
-.hero-section p{opacity:0.9;font-size:1.1rem;max-width:600px;margin-bottom:1.5rem}
-.hero-buttons{display:flex;gap:12px;flex-wrap:wrap}
-.hero-section .btn-primary{background:white;color:var(--primary)}
-.hero-section .btn-secondary{background:rgba(255,255,255,0.2)}
-.hero-stats{display:flex;gap:2rem;margin-top:2rem;flex-wrap:wrap}
-.hero-stat{display:flex;align-items:center;gap:12px}
-.hero-stat i{font-size:2rem;opacity:0.8}
-.stat-number{font-size:1.8rem;font-weight:700}
-.stat-label{font-size:0.85rem;opacity:0.8}
-.quick-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:1rem;margin-bottom:2rem}
-.quick-card{background:var(--white);padding:1.5rem;border-radius:var(--radius);box-shadow:var(--shadow);text-align:center;cursor:pointer;transition:all 0.3s;border:2px solid transparent}
-.quick-card:hover{transform:translateY(-5px);box-shadow:var(--shadow-hover);border-color:var(--primary)}
-.quick-icon{width:60px;height:60px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:1.5rem;color:white;margin:0 auto 1rem}
-.quick-card h3{font-size:1rem;margin-bottom:6px}
-.quick-card p{font-size:0.85rem;color:var(--text-light)}
-.announcement-item,.assignment-item,.material-item{background:var(--white);border-radius:var(--radius);box-shadow:var(--shadow);padding:1.5rem;margin-bottom:1rem;transition:all 0.3s}
-.announcement-item:hover,.assignment-item:hover,.material-item:hover{transform:translateX(5px);box-shadow:var(--shadow-hover)}
-.announcement-header{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:10px}
-.announcement-badge{padding:4px 12px;border-radius:20px;font-size:0.75rem;font-weight:600}
-.badge-urgent{background:#FEF3C7;color:#92400E}
-.badge-info{background:#DBEAFE;color:#1E40AF}
-.badge-success{background:#D1FAE5;color:#065F46}
-.announcement-title{font-size:1.1rem;font-weight:600;margin-bottom:8px}
-.announcement-meta,.assignment-meta,.material-meta{display:flex;gap:16px;font-size:0.85rem;color:var(--text-light);flex-wrap:wrap}
-.announcement-meta i,.assignment-meta i,.material-meta i{margin-right:4px;color:var(--primary)}
-.announcement-actions,.assignment-actions,.material-actions{display:flex;gap:8px;margin-top:1rem;padding-top:1rem;border-top:1px solid var(--border)}
+.btn-primary{background:linear-gradient(135deg,var(--primary),var(--primary-dark));color:white;padding:14px 28px;border-radius:var(--radius-sm);font-weight:600;display:inline-flex;align-items:center;gap:8px;transition:all 0.3s;border:none}
+.btn-primary:hover{transform:translateY(-2px);box-shadow:0 6px 20px rgba(46,125,50,0.4)}
+.btn-secondary{background:linear-gradient(135deg,var(--secondary),#1565C0);color:white;padding:14px 28px;border-radius:var(--radius-sm);font-weight:600;display:inline-flex;align-items:center;gap:8px}
+.btn-danger{background:linear-gradient(135deg,var(--danger),#DC2626);color:white;padding:10px 20px;border-radius:var(--radius-sm);font-weight:500}
+.btn-sm{padding:8px 16px;font-size:0.85rem}
+.btn-outline{background:none;border:2px solid var(--primary);color:var(--primary);padding:12px 24px;border-radius:var(--radius-sm);font-weight:600;display:inline-flex;align-items:center;gap:8px}
+.btn-outline:hover{background:var(--primary);color:white}
+.item-card{background:var(--bg);border-radius:var(--radius-sm);padding:1.5rem;margin-bottom:1rem;transition:all 0.3s;border-left:4px solid var(--primary)}
+.item-card:hover{transform:translateX(5px);box-shadow:var(--shadow-hover)}
+.item-header{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:10px;flex-wrap:wrap;gap:10px}
+.item-title{font-size:1.1rem;font-weight:600}
+.item-badge{padding:4px 12px;border-radius:20px;font-size:0.75rem;font-weight:600;background:var(--primary);color:white}
+.badge-urgent{background:var(--warning);color:#92400E}
+.badge-info{background:var(--secondary);color:white}
+.badge-success{background:var(--success);color:white}
+.item-meta{display:flex;gap:16px;font-size:0.85rem;color:var(--text-light);flex-wrap:wrap;margin-bottom:10px}
+.item-meta i{margin-right:4px;color:var(--primary)}
+.item-actions{display:flex;gap:8px;margin-top:1rem;padding-top:1rem;border-top:1px solid var(--border);flex-wrap:wrap}
+.empty-state{text-align:center;padding:3rem;color:var(--text-light)}
+.empty-state i{font-size:4rem;margin-bottom:1rem;opacity:0.3}
+.empty-state h3{margin-bottom:0.5rem}
 .modal-overlay{position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,0.5);display:none;align-items:center;justify-content:center;z-index:2000;padding:20px}
 .modal-overlay.active{display:flex}
-.modal{background:var(--white);border-radius:var(--radius);max-width:600px;width:100%;max-height:90vh;overflow-y:auto;animation:modalIn 0.3s ease}
-@keyframes modalIn{from{opacity:0;transform:scale(0.9)}to{opacity:1;transform:scale(1)}}
+.modal{background:var(--white);border-radius:var(--radius);max-width:500px;width:100%;max-height:90vh;overflow-y:auto}
 .modal-header{padding:1.5rem;border-bottom:1px solid var(--border);display:flex;justify-content:space-between;align-items:center}
-.modal-header h3{font-size:1.3rem;display:flex;align-items:center;gap:10px}
+.modal-header h3{font-size:1.2rem}
 .modal-close{background:none;border:none;font-size:1.5rem;cursor:pointer;color:var(--text-light)}
 .modal-close:hover{color:var(--danger)}
 .modal-body{padding:1.5rem}
 .modal-footer{padding:1.5rem;border-top:1px solid var(--border);display:flex;gap:10px;justify-content:flex-end}
-.filters-bar{display:flex;gap:1rem;margin-bottom:1.5rem;flex-wrap:wrap}
-.search-box{position:relative;flex:1;min-width:250px}
-.search-box i{position:absolute;left:15px;top:50%;transform:translateY(-50%);color:var(--text-light)}
-.search-box input{width:100%;padding:12px 12px 12px 45px;border:2px solid var(--border);border-radius:var(--radius-sm);font-size:1rem}
-.search-box input:focus{border-color:var(--primary)}
-.filters-bar select{padding:12px 16px;border:2px solid var(--border);border-radius:var(--radius-sm);font-size:1rem;min-width:200px}
-.empty-state{text-align:center;padding:3rem;color:var(--text-light)}
-.empty-state i{font-size:4rem;margin-bottom:1rem;opacity:0.3}
-.empty-state h3{margin-bottom:0.5rem}
-.profile-card{background:var(--white);border-radius:var(--radius);box-shadow:var(--shadow);padding:2rem;text-align:center}
-.profile-avatar{width:120px;height:120px;background:linear-gradient(135deg,var(--primary),var(--primary-light));color:white;font-size:3rem;border-radius:50%;display:flex;align-items:center;justify-content:center;margin:0 auto 1.5rem}
-.profile-info h2{font-size:1.8rem;margin-bottom:0.5rem}
-.profile-info p{color:var(--text-light);margin-bottom:0.5rem}
-.profile-stats{display:flex;justify-content:center;gap:2rem;margin-top:2rem;padding-top:2rem;border-top:1px solid var(--border)}
-.profile-stat{text-align:center}
-.profile-stat span{display:block;font-size:1.5rem;font-weight:700;color:var(--primary)}
-.profile-stat label{font-size:0.85rem;color:var(--text-light)}
-.two-col{display:grid;grid-template-columns:1fr 1fr;gap:1.5rem}
-@media(max-width:768px){.auth-container{flex-direction:column}
-.auth-illustration,.auth-form-container{padding:2rem}
-.two-col{grid-template-columns:1fr}
-.nav-links{display:none;position:absolute;top:70px;left:0;right:0;background:white;flex-direction:column;padding:20px;box-shadow:var(--shadow)}
-.nav-links.active{display:flex}
-.hero-stats{gap:1rem}
-.hero-stat i{font-size:1.5rem}
-.stat-number{font-size:1.4rem}
-.page-header{flex-direction:column;align-items:flex-start}
-.page-header .btn-primary{width:100%;justify-content:center}}
+.video-container{position:relative;padding-bottom:56.25%;height:0;overflow:hidden;border-radius:var(--radius);margin-bottom:1rem}
+.video-container iframe{position:absolute;top:0;left:0;width:100%;height:100%}
+.contact-display{background:var(--bg);padding:1.5rem;border-radius:var(--radius-sm);text-align:center}
+.contact-display h3{color:var(--primary);margin-bottom:1rem}
+.contact-display p{margin:8px 0}
+.contact-display i{color:var(--primary);margin-right:8px;width:20px}
+footer{background:linear-gradient(135deg,var(--primary),var(--primary-dark));color:white;text-align:center;padding:2rem;margin-top:2rem}
+footer p{opacity:0.9}
+.login-btn{background:var(--accent);color:white;padding:8px 20px;border-radius:var(--radius-sm);font-weight:600;display:inline-flex;align-items:center;gap:8px}
+.login-btn:hover{background:#E65100}
+@media(max-width:768px){header h1{font-size:1.3rem;flex-direction:column}
+.nav-links{justify-content:flex-start;overflow-x:auto;flex-wrap:nowrap;padding-bottom:10px}
+.nav-links a{white-space:nowrap}
+section{padding:1.5rem}
+.item-header{flex-direction:column}
+.container{padding:1rem}}
 .hidden{display:none!important}
-table{width:100%;border-collapse:collapse}
-th,td{padding:14px;text-align:left;border-bottom:1px solid var(--border)}
-th{background:var(--primary);color:white;font-weight:600}
-tbody tr:hover{background:var(--bg)}
-.badge{background:var(--primary);color:white
+.alert{padding:1rem;border-radius:var(--radius-sm);margin-bottom:1rem;display:flex;align-items:center;gap:10px}
+.alert-success{background:#D1FAE5;color:#065F46}
+.alert-warning{background:#FEF3C7;color:#92400E}
+.alert-info{background:#DBEAFE;color:#1E40AF}
+</style>
+</head>
+
+<body>
+
+<!-- ================= HEADER ================= -->
+<header>
+    <h1 aria-label="Classroom Title"><i class="fas fa-heart-pulse"></i> TDBE 1:2 2025/2026</h1>
+    <p>Biomedical Engineering Department - Classroom Portal</p>
+</header>
+
+<!-- ================= NAVIGATION ================= -->
+<nav aria-label="Main Navigation">
+    <div class="logo">
+        <i class="fas fa-hospital-alt"></i>
+        <span>TDBE 1:2</span>
+    </div>
+    <ul class="nav-links">
+        <li><a href="#announcements" class="active"><i class="fas fa-bullhorn"></i> <span>Announcements</span></a></li>
+        <li><a href="#assignments"><i class="fas fa-tasks"></i> <span>Assignments</span></a></li>
+        <li><a href="#syllabus"><i class="fas fa-clipboard-list"></i> <span>Syllabus</span></a></li>
+        <li><a href="#materials"><i class="fas fa-book"></i> <span>Materials</span></a></li>
+        <li><a href="#links"><i class="fas fa-link"></i> <span>Portal Links</span></a></li>
+        <li><a href="#videos"><i class="fas fa-video"></i> <span>Videos</span></a></li>
+        <li><a href="#submissions"><i class="fas fa-upload"></i> <span>Submit Work</span></a></li>
+        <li><a href="#contact"><i class="fas fa-address-card"></i> <span>Contact</span></a></li>
+        <li><a href="#login" class="login-btn"><i class="fas fa-sign-in-alt"></i> Login</a></li>
+    </ul>
+</nav>
+
+<!-- ================= MAIN CONTAINER ================= -->
+<div class="container">
+
+<!-- ================= ANNOUNCEMENTS SECTION ================= -->
+<section id="announcements">
+    <h2><i class="fas fa-bullhorn"></i> Classroom Announcements</h2>
+    <div id="announcementAlert"></div>
+
+    <!-- Upload Form (Admin or Tutor) -->
+    <form id="announcementForm" class="admin-tutor-only" aria-label="Upload Announcement" style="margin-bottom:2rem; padding:1.5rem; background:var(--bg); border-radius:var(--radius-sm);">
+        <h3 style="margin-bottom:1rem;"><i class="fas fa-plus-circle"></i> Post New Announcement</h3>
+        <div class="form-group">
+            <label for="announcementTitle"><i class="fas fa-heading"></i> Title:</label>
+            <input type="text" id="announcementTitle" class="form-control" placeholder="Announcement title" required>
+        </div>
+        <div class="form-group">
+            <label for="announcementText"><i class="fas fa-paragraph"></i> Message:</label>
+            <textarea id="announcementText" class="form-control" placeholder="Enter your announcement message" required></textarea>
+        </div>
+        <div class="form-group">
+            <label for="announcementType"><i class="fas fa-tag"></i> Type:</label>
+            <select id="announcementType" class="form-control">
+                <option value="info">Information</option>
+                <option value="urgent">Urgent</option>
+                <option value="success">Success</option>
+            </select>
+        </div>
+        <button type="submit" class="btn-primary"><i class="fas fa-paper-plane"></i> Post Announcement</button>
+    </form>
+
+    <div id="announcementList" aria-live="polite">
+        <!-- Dynamic announcements will appear here -->
+    </div>
+</section>
+
+<!-- ================= ASSIGNMENTS SECTION ================= -->
+<section id="assignments">
+    <h2><i class="fas fa-tasks"></i> Homework Assignments</h2>
+    <div id="assignmentAlert"></div>
+
+    <!-- Assignment Upload Form (Tutors based on subject) -->
+    <form id="assignmentForm" class="admin-tutor-only" aria-label="Upload Assignment" style="margin-bottom:2rem; padding:1.5rem; background:var(--bg); border-radius:var(--radius-sm);">
+        <h3 style="margin-bottom:1rem;"><i class="fas fa-plus-circle"></i> Upload New Assignment</h3>
+        
+        <div class="form-group">
+            <label for="assignmentSubject"><i class="fas fa-book"></i> Subject:</label>
+            <select id="assignmentSubject" class="form-control" required>
+                <option value="">--Select Subject--</option>
+                <option value="Hospital Management and Information Systems">Hospital Management and Information Systems - Mrs. SUMAIAH ZAID N.</option>
+                <option value="Electronics and Devices">Electronics and Devices - Mr. Marvin MAYAMBALA</option>
+                <option value="Biomedical Signals and Systems">Biomedical Signals and Systems - Miss ALICE MARTHA N.</option>
+                <option value="Trouble Shooting in Medical Electronics">Trouble Shooting in Medical Electronics - Mr. OGWANG EMMANUEL</option>
+                <option value="Medical Imaging Techniques">Medical Imaging Techniques - Mr. OGWANG EMMANUEL</option>
+                <option value="Biomedical Sensors and Measurement Devices">Biomedical Sensors and Measurement Devices - Mr. EMMANUEL OMONGO</option>
+                <option value="Real Life Project 2">Real Life Project 2 - ALL TUTORS</option>
+            </select>
+        </div>
+                <div class="form-group">
+            <label for="assignmentTitle"><i class="fas fa-heading"></i> Assignment Title:</label>
+            <input type="text" id="assignmentTitle" class="form-control" placeholder="Enter assignment title" required>
+        </div>
+        
+        <div class="form-group">
+            <label for="assignmentText"><i class="fas fa-paragraph"></i> Description:</label>
+            <textarea id="assignmentText" class="form-control" placeholder="Enter assignment description and instructions" required></textarea>
+        </div>
+        
+        <div class="form-group">
+            <label for="assignmentDeadline"><i class="fas fa-calendar"></i> Deadline:</label>
+            <input type="date" id="assignmentDeadline" class="form-control" required>
+        </div>
+        
+        <div class="form-group">
+            <label for="assignmentFile"><i class="fas fa-file-pdf"></i> Attach File (Optional):</label>
+            <input type="file" id="assignmentFile" class="form-control" accept=".pdf,.doc,.docx,.zip">
+        </div>
+        
+        <button type="submit" class="btn-primary"><i class="fas fa-upload"></i> Upload Assignment</button>
+    </form>
+
+    <div id="assignmentList">
+        <!-- Dynamic assignments will appear here -->
+    </div>
+</section>
+
+<!-- ================= SYLLABUS SECTION ================= -->
+<section id="syllabus">
+    <h2><i class="fas fa-clipboard-list"></i> Class Syllabus</h2>
+    <div id="syllabusAlert"></div>
+
+    <!-- Admin Upload Only -->
+    <form id="syllabusUploadForm" class="admin-only" aria-label="Upload Syllabus" style="margin-bottom:2rem; padding:1.5rem; background:var(--bg); border-radius:var(--radius-sm);">
+        <h3 style="margin-bottom:1rem;"><i class="fas fa-plus-circle"></i> Upload Course Outline (Admin Only)</h3>
+        
+        <div class="form-group">
+            <label for="syllabusSubject"><i class="fas fa-book"></i> Subject:</label>
+            <select id="syllabusSubject" class="form-control" required>
+                <option value="">--Select Subject--</option>
+                <option value="Hospital Management and Information Systems">Hospital Management and Information Systems</option>
+                <option value="Electronics and Devices">Electronics and Devices</option>
+                <option value="Biomedical Signals and Systems">Biomedical Signals and Systems</option>
+                <option value="Trouble Shooting in Medical Electronics">Trouble Shooting in Medical Electronics</option>
+                <option value="Medical Imaging Techniques">Medical Imaging Techniques</option>
+                <option value="Biomedical Sensors and Measurement Devices">Biomedical Sensors and Measurement Devices</option>
+                <option value="Real Life Project 2">Real Life Project 2</option>
+            </select>
+        </div>
+        
+        <div class="form-group">
+            <label for="syllabusFile"><i class="fas fa-file-pdf"></i> Upload PDF:</label>
+            <input type="file" id="syllabusFile" class="form-control" accept=".pdf" required>
+        </div>
+        
+        <button type="submit" class="btn-primary"><i class="fas fa-upload"></i> Upload Syllabus</button>
+    </form>
+
+    <div id="syllabusList">
+        <!-- Uploaded syllabus appears here -->
+    </div>
+</section>
+
+<!-- ================= DOWNLOADABLE MATERIALS SECTION ================= -->
+<section id="materials">
+    <h2><i class="fas fa-book"></i> Downloadable Learning Materials</h2>
+    <div id="materialsAlert"></div>
+
+    <!-- Materials Upload Form (Admin or Tutor) -->
+    <form id="materialsUploadForm" class="admin-tutor-only" aria-label="Upload Materials" style="margin-bottom:2rem; padding:1.5rem; background:var(--bg); border-radius:var(--radius-sm);">
+        <h3 style="margin-bottom:1rem;"><i class="fas fa-plus-circle"></i> Upload Learning Material</h3>
+        
+        <div class="form-group">
+            <label for="materialSubject"><i class="fas fa-book"></i> Subject:</label>
+            <select id="materialSubject" class="form-control" required>
+                <option value="">--Select Subject--</option>
+                <option value="Hospital Management and Information Systems">Hospital Management and Information Systems</option>
+                <option value="Electronics and Devices">Electronics and Devices</option>
+                <option value="Biomedical Signals and Systems">Biomedical Signals and Systems</option>
+                <option value="Trouble Shooting in Medical Electronics">Trouble Shooting in Medical Electronics</option>
+                <option value="Medical Imaging Techniques">Medical Imaging Techniques</option>
+                <option value="Biomedical Sensors and Measurement Devices">Biomedical Sensors and Measurement Devices</option>
+                <option value="Real Life Project 2">Real Life Project 2</option>
+            </select>
+        </div>
+        
+        <div class="form-group">
+            <label for="materialTitle"><i class="fas fa-heading"></i> Material Title:</label>
+            <input type="text" id="materialTitle" class="form-control" placeholder="Enter material title" required>
+        </div>
+        
+        <div class="form-group">
+            <label for="materialFile"><i class="fas fa-file-pdf"></i> Upload File:</label>
+            <input type="file" id="materialFile" class="form-control" accept=".pdf,.doc,.docx,.ppt,.pptx,.zip" required>
+        </div>
+        
+        <button type="submit" class="btn-primary"><i class="fas fa-upload"></i> Upload Material</button>
+    </form>
+
+    <div id="materialsList">
+        <!-- Uploaded materials appear here -->
+    </div>
+</section>
+
+<!-- ================= GOOGLE CLASSROOM / ZOOM LINKS SECTION ================= -->
+<section id="links">
+    <h2><i class="fas fa-link"></i> Learning Portals (Google Classroom / Zoom)</h2>
+    <div id="portalAlert"></div>
+
+    <!-- Admin Controlled Links -->
+    <form id="portalForm" class="admin-only" aria-label="Add Portal Link" style="margin-bottom:2rem; padding:1.5rem; background:var(--bg); border-radius:var(--radius-sm);">
+        <h3 style="margin-bottom:1rem;"><i class="fas fa-plus-circle"></i> Add New Portal (Admin Only)</h3>
+        
+        <div class="form-group">
+            <label for="portalName"><i class="fas fa-heading"></i> Portal Name:</label>
+            <input type="text" id="portalName" class="form-control" placeholder="e.g., Google Classroom, Zoom, Moodle" required>
+        </div>
+        
+        <div class="form-group">
+            <label for="portalLink"><i class="fas fa-link"></i> Portal URL:</label>
+            <input type="url" id="portalLink" class="form-control" placeholder="https://classroom.google.com/..." required>
+        </div>
+        
+        <div class="form-group">
+            <label for="portalDescription"><i class="fas fa-info-circle"></i> Description (Optional):</label>
+            <input type="text" id="portalDescription" class="form-control" placeholder="Brief description of this portal">
+        </div>
+        
+        <button type="submit" class="btn-primary"><i class="fas fa-plus"></i> Add Portal</button>
+    </form>
+
+    <div id="portalList">
+        <!-- Portal links will appear here -->
+    </div>
+</section>
+
+<!-- ================= YOUTUBE EMBED SECTION ================= -->
+<section id="videos">
+    <h2><i class="fas fa-video"></i> Supplementary Learning Videos</h2>
+    <div id="videoAlert"></div>
+
+    <!-- Admin: Add/Edit Video Links -->
+    <form id="videoForm" class="admin-only" aria-label="Add Video" style="margin-bottom:2rem; padding:1.5rem; background:var(--bg); border-radius:var(--radius-sm);">
+        <h3 style="margin-bottom:1rem;"><i class="fas fa-plus-circle"></i> Add Video Playlist (Admin Only)</h3>
+        
+        <div class="form-group">
+            <label for="videoTitle"><i class="fas fa-heading"></i> Video Title:</label>
+            <input type="text" id="videoTitle" class="form-control" placeholder="e.g., Signals and Systems - Neso Academy" required>
+        </div>
+        
+        <div class="form-group">
+            <label for="videoUrl"><i class="fas fa-link"></i> YouTube Playlist/Video URL:</label>
+            <input type="url" id="videoUrl" class="form-control" placeholder="https://www.youtube.com/embed/..." required>
+        </div>
+        
+        <div class="form-group">
+            <label for="videoDescription"><i class="fas fa-info-circle"></i> Description:</label>
+            <input type="text" id="videoDescription" class="form-control" placeholder="Brief description of video content">
+        </div>
+        
+        <button type="submit" class="btn-primary"><i class="fas fa-plus"></i> Add Video</button>
+    </form>
+
+    <div id="videoList">
+        <!-- Video embeds will appear here -->
+    </div>
+    
+    <!-- Default embedded video -->
+    <div class="video-container">
+        <iframe 
+            src="https://www.youtube.com/embed/playlist?list=PLBlnK6fEyqRhqzJT87LsdQK_7YjD9R3ew" 
+            title="Signals and Systems by Neso Academy" 
+            frameborder="0" 
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+            allowfullscreen
+            aria-label="Neso Academy Signals and Systems Playlist">
+        </iframe>
+    </div>
+    <p style="text-align:center; color:var(--text-light); margin-top:1rem;">
+        <i class="fas fa-play-circle"></i> Signals and Systems Playlist by Neso Academy
+    </p>
+</section>
+
+<!-- ================= ASSIGNMENT SUBMISSION SECTION ================= -->
+<section id="submissions">
+    <h2><i class="fas fa-upload"></i> Course Work Submission</h2>
+    <div id="submissionAlert"></div>
+
+    <form id="submissionForm" enctype="multipart/form-data" style="margin-bottom:2rem; padding:1.5rem; background:var(--bg); border-radius:var(--radius-sm);">
+        <h3 style="margin-bottom:1rem;"><i class="fas fa-paper-plane"></i> Submit Your Coursework</h3>
+        
+        <div class="form-group">
+            <label for="studentName"><i class="fas fa-user"></i> Student Name:</label>
+            <input type="text" id="studentName" class="form-control" placeholder="Enter your full name" required>
+        </div>
+        
+        <div class="form-group">
+            <label for="studentId"><i class="fas fa-id-card"></i> Student ID:</label>
+            <input type="text" id="studentId" class="form-control" placeholder="Enter your student ID" required>
+        </div>
+        
+        <div class="form-group">
+            <label for="subject"><i class="fas fa-book"></i> Subject:</label>
+            <select id="subject" class="form-control" required>
+                <option value="">--Select Subject--</option>
+                <option value="Hospital Management and Information Systems">Hospital Management and Information Systems</option>
+                <option value="Electronics and Devices">Electronics and Devices</option>
+                <option value="Biomedical Signals and Systems">Biomedical Signals and Systems</option>
+                <option value="Trouble Shooting in Medical Electronics">Trouble Shooting in Medical Electronics</option>
+                <option value="Medical Imaging Techniques">Medical Imaging Techniques</option>
+                <option value="Biomedical Sensors and Measurement Devices">Biomedical Sensors and Measurement Devices</option>
+                <option value="Real Life Project 2">Real Life Project 2</option>
+            </select>
+        </div>
+        
+        <div class="form-group">
+            <label for="assignmentRef"><i class="fas fa-tasks"></i> Assignment Reference:</label>
+            <input type="text" id="assignmentRef" class="form-control" placeholder="Which assignment is this for?" required>
+        </div>
+        
+        <div class="form-group">
+            <label for="courseworkFile"><i class="fas fa-file-pdf"></i> Upload Coursework:</label>
+            <input type="file" id="courseworkFile" class="form-control" accept=".pdf,.doc,.docx,.zip" required>
+        </div>
+        
+        <button type="submit" class="btn-primary"><i class="fas fa-paper-plane"></i> Submit Coursework</button>
+    </form>
+
+    <!-- View Submitted Assignments (for Tutors/Admin) -->
+    <div id="submittedList" class="admin-tutor-only">
+        <h3 style="margin:2rem 0 1rem;"><i class="fas fa-folder-open"></i> Received Submissions</h3>
+    </div>
+</section>
+
+<!-- ================= CONTACT SECTION ================= -->
+<section id="contact">
+    <h2><i class="fas fa-address-card"></i> Administrator Contact Information</h2>
+    <div id="contactAlert"></div>
+
+    <form id="adminContactForm" class="admin-only" aria-label="Update Contact Info" style="margin-bottom:2rem; padding:1.5rem; background:var(--bg); border-radius:var(--radius-sm);">
+        <h3 style="margin-bottom:1rem;"><i class="fas fa-edit"></i> Update Contact Information (Admin Only)</h3>
+        
+        <div class="form-group">
+            <label for="adminName"><i class="fas fa-user"></i> Admin Name:</label>
+            <input type="text" id="adminName" class="form-control" placeholder="Administrator name">
+        </div>
+        
+        <div class="form-group">
+            <label for="adminEmail"><i class="fas fa-envelope"></i> Admin Email:</label>
+            <input type="email" id="adminEmail" class="form-control" placeholder="admin@university.edu">
+        </div>
+        
+        <div class="form-group">
+            <label for="adminPhone"><i class="fas fa-phone"></i> Admin Phone:</label>
+            <input type="tel" id="adminPhone" class="form-control" placeholder="+1234567890">
+        </div>
+        
+        <button type="submit" class="btn-primary"><i class="fas fa-save"></i> Update Contact Info</button>
+    </form>
+
+    <div id="adminContactDisplay" class="contact-display">
+        <!-- Contact info will appear here -->
+    </div>
+</section>
+
+<!-- ================= LOGIN SECTION ================= -->
+<section id="login">
+    <h2><i class="fas fa-sign-in-alt"></i> Portal Login</h2>
+    <div id="loginAlert"></div>
+
+    <form id="loginForm" style="max-width:400px; margin:0 auto; padding:2rem; background:var(--bg); border-radius:var(--radius-sm);">
+        <div class="form-group">
+            <label for="loginEmail"><i class="fas fa-envelope"></i> Email:</label>
+            <input type="email" id="loginEmail" class="form-control" placeholder="your.email@university.edu" required>
+        </div>
+        
+        <div class="form-group">
+            <label for="loginPassword"><i class="fas fa-lock"></i> Password:</label>
+            <input type="password" id="loginPassword" class="form-control" placeholder="Enter your password" required>
+        </div>
+        
+        <button type="submit" class="btn-primary" style="width:100%;"><i class="fas fa-sign-in-alt"></i> Login</button>
+    </form>
+
+    <div style="margin-top:2rem; padding:1.5rem; background:var(--bg); border-radius:var(--radius-sm); text-align:center;">
+        <h3 style="margin-bottom:1rem;">Demo Accounts</h3>
+        <p style="margin-bottom:1rem;">Click to login as:</p>
+        <div style="display:flex; gap:10px; justify-content:center; flex-wrap:wrap;">
+            <button onclick="loginAs('admin@tdbe.edu', 'admin123', 'admin')" class="btn-outline"><i class="fas fa-user-shield"></i> Admin</button>
+            <button onclick="loginAs('sumaiah@tdbe.edu', 'tutor123', 'tutor')" class="btn-outline"><i class="fas fa-chalkboard-teacher"></i> Tutor</button>
+            <button onclick="loginAs('student@tdbe.edu', 'student123', 'student')" class="btn-outline"><i class="fas fa-user-graduate"></i> Student</button>
+        </div>
+    </div>
+</section>
+
+</div>
+
+<!-- ================= FOOTER ================= -->
+<footer>
+    <p><i class="fas fa-hospital-alt"></i> TDBE 1:2 2025/2026 - Biomedical Engineering Department</p>
+    <p>&copy; 2026 All Rights Reserved | Classroom Portal</p>
+</footer>
+
+<!-- ================= JAVASCRIPT ================= -->
+<script>
+/* ============================================
+   TDBE 1:2 2025/2026 - COMPLETE JAVASCRIPT
+   All Features Functioning
+============================================ */
+
+// ================= DATABASE =================
+const db = {
+    currentUser: null,
+    
+    users: [
+        { id: 1, email: 'admin@tdbe.edu', password: 'admin123', role: 'admin', name: 'Administrator' },
+        { id: 2, email: 'sumaiah@tdbe.edu', password: 'tutor123', role: 'tutor', name: 'Mrs. SUMAIAH ZAID N.', subject: 'Hospital Management and Information Systems' },
+        { id: 3, email: 'marvin@tdbe.edu', password: 'tutor123', role: 'tutor', name: 'Mr. Marvin MAYAMBALA', subject: 'Electronics and Devices' },
+        { id: 4, email: 'alice@tdbe.edu', password: 'tutor123', role: 'tutor', name: 'Miss ALICE MARTHA N.', subject: 'Biomedical Signals and Systems' },
+        { id: 5, email: 'ogwang@tdbe.edu', password: 'tutor123', role: 'tutor', name: 'Mr. OGWANG EMMANUEL', subject: 'Trouble Shooting in Medical Electronics, Medical Imaging Techniques' },
+        { id: 6, email: 'emmannuel@tdbe.edu', password: 'tutor123', role: 'tutor', name: 'Mr. EMMANUEL OMONGO', subject: 'Biomedical Sensors and Measurement Devices' },
+        { id: 7, email: 'student@tdbe.edu', password: 'student123', role: 'student', name: 'Student User' }
+    ],
+
+    // Tutor subjects mapping
+    tutorSubjects: {
+        'sumaiah@tdbe.edu': ['Hospital Management and Information Systems'],
+        'marvin@tdbe.edu': ['Electronics and Devices'],
+        'alice@tdbe.edu': ['Biomedical Signals and Systems'],
+        'ogwang@tdbe.edu': ['Trouble Shooting in Medical Electronics', 'Medical Imaging Techniques'],
+        'emmannuel@tdbe.edu': ['Biomedical Sensors and Measurement Devices']
+    },
+
+    announcements: [
+        { id: 1, title: 'Welcome to TDBE 1:2 2025/2026', content: 'Welcome to the new academic year! All students are advised to regularly check this portal for announcements, assignments, and learning materials.', author: 'Administrator', date: '2026-01-15', type: 'info' }
+    ],
+
+    assignments: [
+        { id: 1, title: 'Hospital Information Systems Quiz', subject: 'Hospital Management and Information Systems', description: 'Complete the quiz on Chapter 1-3. Last date to submit is February 15, 2026.', deadline: '2026-02-15', file: null, author: 'Mrs. SUMAIAH ZAID N.', date: '2026-01-20' },
+        { id: 2, title: 'Circuit Analysis Assignment', subject: 'Electronics and Devices', description: 'Solve all problems in Chapter 4. Submit by February 20, 2026.', deadline: '2026-02-20', file: null, author: 'Mr. Marvin MAYAMBALA', date: '2026-01-22' }
+    ],
+
+    syllabus: [
+        { id: 1, subject: 'Hospital Management and Information Systems', file: 'HIS-Syllabus.pdf', date: '2026-01-10', author: 'Administrator' }
+    ],
+
+    materials: [
+        { id: 1, title: 'Introduction to Hospital Information Systems', subject: 'Hospital Management and Information Systems', file: 'HIS-Intro.pdf', date: '2026-01-12', author: 'Mrs. SUMAIAH ZAID N.' },
+        { id: 2, title: 'Basic Electronics Notes', subject: 'Electronics and Devices', file: 'Electronics-Notes.pdf', date: '2026-01-14', author: 'Mr. Marvin MAYAMBALA' }
+    ],
+
+    portals: [
+        { id: 1, name: 'Google Classroom', url: 'https://classroom.google.com', description: 'Submit assignments and view course materials' },
+        { id: 2, name: 'Zoom', url: 'https://zoom.us', description: 'Join online classes and meetings' }
+    ],
+
+    videos: [
+        { id: 1, title: 'Signals and Systems - Neso Academy', url: 'https://www.youtube.com/embed/playlist?list=PLBlnK6fEyqRhqzJT87LsdQK_7YjD9R3ew', description: 'Complete playlist for Signals and Systems' }
+    ],
+
+    submissions: [
+        { id: 1, studentName: 'John Doe', studentId: 'TDBE/2025/001', subject: 'Hospital Management and Information Systems', assignmentRef: 'Hospital Information Systems Quiz', file: 'submission1.pdf', date: '2026-01-25', status: 'pending' }
+    ],
+
+    contact: {
+        name: 'TDBE 1:2 Administration',
+        email: 'admin@tdbe.edu',
+        phone: '+1234567890'
+    }
+};
+
+// ================= INITIALIZATION =================
+document.addEventListener('DOMContentLoaded', function() {
+    loadAllData();
+    setupEventListeners();
+    checkSession();
+});
+
+function loadAllData() {
+    renderAnnouncements();
+    renderAssignments();
+    renderSyllabus();
+    renderMaterials();
+    renderPortals();
+    renderVideos();
+    renderSubmissions();
+    renderContact();
+}
+
+function setupEventListeners() {
+    // Navigation
+    document.querySelectorAll('.nav-links a').forEach(link => {
+        link.addEventListener('click', function(e) {
+            document.querySelectorAll('.nav-links a').forEach(l => l.classList.remove('active'));
+            this.classList.add('active');
+        });
+    });
+
+    // Forms
+    document.getElementById('announcementForm').addEventListener('submit', handleAnnouncementSubmit);
+    document.getElementById('assignmentForm').addEventListener('submit', handleAssignmentSubmit);
+    document.getElementById('syllabusUploadForm').addEventListener('submit', handleSyllabusSubmit);
+    document.getElementById('materialsUploadForm').addEventListener('submit', handleMaterialsSubmit);
+    document.getElementById('portalForm').addEventListener('submit', handlePortalSubmit);
+    document.getElementById('videoForm').addEventListener('submit', handleVideoSubmit);
+    document.getElementById('submissionForm').addEventListener('submit', handleSubmissionSubmit);
+    document.getElementById('adminContactForm').addEventListener('submit', handleContactSubmit);
+    document.getElementById('loginForm').addEventListener('submit', handleLogin);
+}
+
+// ================= AUTHENTICATION =================
+function handleLogin(e) {
+    e.preventDefault();
+    const email = document.getElementById('loginEmail').value;
+    const password = document.getElementById('loginPassword').value;
+    loginAs(email, password, null);
+}
+
+function loginAs(email, password, role) {
+    const user = db.users.find(u => u.email === email && u.password === password);
+    if (user) {
+        if (role && user.role !== role) {
+            showAlert('loginAlert', 'Invalid role selected', 'warning');
+            return;
+        }
+        db.currentUser = user;
+        localStorage.setItem('tdbe_user', JSON.stringify(user));
+        showAlert('loginAlert', 'Login successful! Welcome, ' + user.name, 'success');
+        updateUIForRole();
+        setTimeout(() => showPage('announcements'), 1000);
+    } else {
+        showAlert('loginAlert', 'Invalid email or password', 'danger');
+    }
+}
+
+function logout() {
+    db.currentUser = null;
+    localStorage.removeItem('tdbe_user');
+    document.querySelectorAll('.admin-only, .admin-tutor-only').forEach(el => el.classList.add('hidden'));
+    showAlert('loginAlert', 'Logged out successfully', 'success');
+}
+
+function checkSession() {
+    const savedUser = localStorage.getItem('tdbe_user');
+    if (savedUser) {
+        db.currentUser = JSON.parse(savedUser);
+        updateUIForRole();
+    }
+}
+
+function updateUIForRole() {
+    if (!db.currentUser) return;
+    
+    const role = db.currentUser.role;
+    
+    // Show/hide based on role
+    if (role === 'admin') {
+        document.querySelectorAll('.admin-only').forEach(el => el.classList.remove('hidden'));
+        document.querySelectorAll('.admin-tutor-only').forEach(el => el.classList.remove('hidden'));
+    } else if (role === 'tutor') {
+        document.querySelectorAll('.admin-only').forEach(el => el.classList.add('hidden'));
+        document.querySelectorAll('.admin-tutor-only').forEach(el => el.classList.remove('hidden'));
+    } else {
+        document.querySelectorAll('.admin-only, .admin-tutor-only').forEach(el => el.classList.add('hidden'));
+    }
+}
+
+// ================= ANNOUNCEMENTS =================
+function handleAnnouncementSubmit(e) {
+    e.preventDefault();
+    if (!db.currentUser || db.currentUser.role === 'student') {
+        showAlert('announcementAlert', 'Only admins and tutors can post announcements', 'warning');
+        return;
+    }
+    
+    const title = document.getElementById('announcementTitle').value;
+    const content = document.getElementById('announcementText').value;
+    const type = document.getElementById('announcementType').value;
+    
+    const announcement = {
+        id: db.announcements.length + 1,
+        title,
+        content,
+        author: db.currentUser.name,
+        date: new Date().toISOString().split('T')[0],
+        type
+    };
+    
+    db.announcements.unshift(announcement);
+    renderAnnouncements();
+    document.getElementById('announcementForm').reset();
+    showAlert('announcementAlert', 'Announcement posted successfully!', 'success');
+}
+
+function renderAnnouncements() {
+    const container = document.getElementById('announcementList');
+    if (!container) return;
+    
+    if (db.announcements.length === 0) {
+        container.innerHTML = '<div class="empty-state"><i class="fas fa-bullhorn"></i><h3>No Announcements</h3><p>No announcements have been posted yet.</p></div>';
+        return;
+    }
+    
+    container.innerHTML = db.announcements.map(a => `
+        <div class="item-card">
+            <div class="item-header">
+                <span class="item-title">${a.title}</span>
+                <span class="item-badge badge-${a.type}">${a.type.toUpperCase()}</span>
+            </div>
+            <p style="margin-bottom:10px;">${a.content}</p>
+            <div class="item-meta">
+                <span><i class="fas fa-user"></i> ${a.author}</span>
+                <span><i class="fas fa-calendar"></i> ${a.date}</span>
+            </div>
+            ${db.currentUser && db.currentUser.role === 'admin' ? `
+            <div class="item-actions">
+                <button onclick="deleteAnnouncement(${a.id})" class="btn-danger btn-sm"><i class="fas fa-trash"></i> Delete</button>
+            </div>
+            ` : ''}
+        </div>
+    `).join('');
+}
+
+function deleteAnnouncement(id) {
+    if (confirm('Are you sure you want to delete this announcement?')) {
+        db.announcements = db.announcements.filter(a => a.id !== id);
+        renderAnnouncements();
+        showAlert('announcementAlert', 'Announcement deleted', 'success');
+    }
+}
+
+// ================= ASSIGNMENTS =================
+function handleAssignmentSubmit(e) {
+    e.preventDefault();
+    if (!db.currentUser || db.currentUser.role === 'student') {
+        showAlert('assignmentAlert', 'Only tutors and admins can upload assignments', 'warning');
+        return;
+    }
+    
+    const subject = document.getElementById('assignmentSubject').value;
+    const title = document.getElementById('assignmentTitle').value;
+    const description = document.getElementById('assignmentText').value;
+    const deadline = document.getElementById('assignmentDeadline').value;
+    
+    // Check tutor permissions
+    if (db.currentUser.role === 'tutor') {
+        const tutorSubjects = db.tutorSubjects[db.currentUser.email] || [];
+        const canUpload = tutorSubjects.some(s => subject.includes(s)) || subject.includes('Real Life Project 2');
+        if (!canUpload) {
+            showAlert('assignmentAlert', 'You can only upload assignments for your assigned subjects', 'danger');
+            return;
+        }
+    }
+    
+    const assignment = {
+        id: db.assignments.length + 1,
+        title,
+        subject,
+        description,
+        deadline,
+        file: null,
+        author: db.currentUser.name,
+        date: new Date().toISOString().split('T')[0]
+    };
+    
+    db.assignments.unshift(assignment);
+    renderAssignments();
+    document.getElementById('assignmentForm').reset();
+    showAlert('assignmentAlert', 'Assignment uploaded successfully!', 'success');
+}
+
+function renderAssignments() {
+    const container = document.getElementById('assignmentList');
+    if (!container) return;
+    
+    if (db.assignments.length === 0) {
+        container.innerHTML = '<div class="empty-state"><i class="fas fa-tasks"></i><h3>No Assignments</h3><p>No assignments have been uploaded yet.</p></div>';
+        return;
+    }
+    
+    container.innerHTML = db.assignments.map(a => `
+        <div class="item-card">
+            <div class="item-header">
+                <span class="item-title">${a.title}</span>
+                <span class="item-badge">${a.subject}</span>
+            </div>
+            <p style="margin-bottom:10px;">${a.description}</p>
+            <div class="item-meta">
+                <span><i class="fas fa-user"></i> ${a.author}</span>
+                <span><i class="fas fa-calendar"></i> Due: ${a.deadline}</span>
+                <span><i class="fas fa-clock"></i> Posted: ${a.date}</span>
+            </div>
+            <div class="item-actions">
+                <button class="btn-primary btn-sm"><i class="fas fa-download"></i> Download</button>
+                ${db.currentUser && db.currentUser.role === 'admin' ? `<button onclick="deleteAssignment(${a.id})" class="btn-danger btn-sm"><i class="fas fa-trash"></i> Delete</button>` : ''}
+            </div>
+        </div>
+    `).join('');
+}
+
+function deleteAssignment(id) {
+    if (confirm('Are you sure you want to delete this assignment?')) {
+        db.assignments = db.assignments.filter(a => a.id !== id);
+        renderAssignments();
+        showAlert('assignmentAlert', 'Assignment deleted', 'success');
+    }
+}
+
+// ================= SYLLABUS =================
+function handleSyllabusSubmit(e) {
+    e.preventDefault();
+    if (!db.currentUser || db.currentUser.role !== 'admin') {
+        showAlert('syllabusAlert', 'Only admins can upload syllabus', 'warning');
+        return;
+    }
+    
+    const subject = document.getElementById('syllabusSubject').value;
+    const fileInput = document.getElementById('syllabusFile');
+    
+    const syllabus = {
+        id: db.syllabus.length + 1,
+        subject,
+        file: fileInput.files[0] ? fileInput.files[0].name : 'syllabus.pdf',
+        date: new Date().toISOString().split('T')[0],
+        author: db.currentUser.name
+    };
+    
+    db.syllabus.push(syllabus);
+    renderSyllabus();
+    document.getElementById('syllabusUploadForm').reset();
+    showAlert('syllabusAlert', 'Syllabus uploaded successfully!', 'success');
+}
+
+function renderSyllabus() {
+    const container = document.getElementById('syllabusList');
+    if (!container) return;
+    
+    if (db.syllabus.length === 0) {
+        container.innerHTML = '<div class="empty-state"><i class="fas fa-clipboard-list"></i><h3>No Syllabus</h3><p>No course syllabus has been uploaded yet.</p></div>';
+        return;
+    }
+    
+    container.innerHTML = db.syllabus.map(s => `
+        <div class="item-card">
+            <div class="item-header">
+                <span class="item-title"><i class="fas fa-file-pdf"></i> ${s.subject}</span>
+            </div>
+            <div class="item-meta">
+                <span><i class="fas fa-user"></i> ${s.author}</span>
+                <span><i class="fas fa-calendar"></i> ${s.date}</span>
+            </div>
+            <div class="item-actions">
+                <button class="btn-primary btn-sm"><i class="fas fa-download"></i> Download</button>
+                ${db.currentUser && db.currentUser.role === 'admin' ? `<button onclick="deleteSyllabus(${s.id})" class="btn-danger btn-sm"><i class="fas fa-trash"></i> Delete</button>` : ''}
+            </div>
+        </div>
+    `).join('');
+}
+
+function deleteSyllabus(id) {
+    if (confirm('Are you sure you want to delete this syllabus?')) {
+        db.syllabus = db.syllabus.filter(s => s.id !== id);
+        renderSyllabus();
+        showAlert('syllabusAlert', 'Syllabus deleted', 'success');
+    }
+}
+
+// ================= MATERIALS =================
+function handleMaterialsSubmit(e) {
+    e.preventDefault();
+    if (!db.currentUser || db.currentUser.role === 'student') {
+        showAlert('materialsAlert', 'Only tutors and admins can upload materials', 'warning');
+        return;
+    }
+    
+    const subject = document.getElementById('materialSubject').value;
+    const title = document.getElementById('materialTitle').value;
+    const fileInput = document.getElementById('materialFile');
+    
+    const material = {
+        id: db.materials.length + 1,
+        subject,
+        title,
+        file: fileInput.files[0] ? fileInput.files[0].name : 'material.pdf',
+        date: new Date().toISOString().split('T')[0],
+        author: db.currentUser.name
+    };
+    
+    db.materials.push(material);
+    renderMaterials();
+    document.getElementById('materialsUploadForm').reset();
+    showAlert('materialsAlert', 'Material uploaded successfully!', 'success');
+}
+
+function renderMaterials() {
+    const container = document.getElementById('materialsList');
+    if (!container) return;
+    
+    if (db.materials.length === 0) {
+        container.innerHTML = '<div class="empty-state"><i class="fas fa-book"></i><h3>No Materials</h3><p>No learning materials have been uploaded yet
+            const name = document.getElementById('portalName').value;
+const url = document.getElementById('portalLink').value;
+const description = document.getElementById('portalDescription').value;
+
+const portal = {
+    id: db.portals.length + 1,
+    name,
+    url,
+    description
+};
+
+db.portals.push(portal);
+renderPortals();
+document.getElementById('portalForm').reset();
+showAlert('portalAlert', 'Portal link added successfully!', 'success');
+if (db.portals.length === 0) {
+    container.innerHTML = '<div class="empty-state"><i class="fas fa-link"></i><h3>No Portal Links</h3><p>No portal links have been added yet.</p></div>';
+    return;
+}
+
+container.innerHTML = db.portals.map(p => `
+    <div class="item-card" style="border-left-color: var(--secondary);">
+        <div class="item-header">
+            <span class="item-title"><i class="fas fa-external-link-alt"></i> ${p.name}</span>
+        </div>
+        <p style="margin-bottom:10px; color: var(--text-light);">${p.description || 'No description'}</p>
+        <div class="item-actions">
+            <a href="${p.url}" target="_blank" class="btn-primary btn-sm"><i class="fas fa-external-link-alt"></i> Open ${p.name}</a>
+            ${db.currentUser && db.currentUser.role === 'admin' ? `<button onclick="deletePortal(${p.id})" class="btn-danger btn-sm"><i class="fas fa-trash"></i> Delete</button>` : ''}
+        </div>
+    </div>
+`).join('');
+const title = document.getElementById('videoTitle').value;
+const url = document.getElementById('videoUrl').value;
+const description = document.getElementById('videoDescription').value;
+
+const video = {
+    id: db.videos.length + 1,
+    title,
+    url,
+    description
+};
+
+db.videos.push(video);
+renderVideos();
+document.getElementById('videoForm').reset();
+showAlert('videoAlert', 'Video added successfully!', 'success');
+if (db.videos.length === 0) {
+    container.innerHTML = '';
+    return;
+}
+
+container.innerHTML = db.videos.map(v => `
+    <div class="item-card" style="margin-bottom: 1rem;">
+        <div class="item-header">
+            <span class="item-title"><i class="fas fa-video"></i> ${v.title}</span>
+        </div>
+        <p style="margin-bottom:10px; color: var(--text-light);">${v.description || ''}</p>
+        <div class="video-container" style="margin-bottom:10px;">
+            <iframe src="${v.url}" frameborder="0" allowfullscreen></iframe>
+        </div>
+        ${db.currentUser && db.currentUser.role === 'admin' ? `
+        <div class="item-actions">
+            <button onclick="deleteVideo(${v.id})" class="btn-danger btn-sm"><i class="fas fa-trash"></i> Delete Video</button>
+        </div>
+        ` : ''}
+    </div>
+`).join('');
+const title = document.getElementById('videoTitle').value;
+const url = document.getElementById('videoUrl').value;
+const description = document.getElementById('videoDescription').value;
+
+const video = {
+    id: db.videos.length + 1,
+    title,
+    url,
+    description
+};
+
+db.videos.push(video);
+renderVideos();
+document.getElementById('videoForm').reset();
+showAlert('videoAlert', 'Video added successfully!', 'success');
+if (db.videos.length === 0) {
+    container.innerHTML = '';
+    return;
+}
+
+container.innerHTML = db.videos.map(v => `
+    <div class="item-card" style="margin-bottom: 1rem;">
+        <div class="item-header">
+            <span class="item-title"><i class="fas fa-video"></i> ${v.title}</span>
+        </div>
+        <p style="margin-bottom:10px; color: var(--text-light);">${v.description || ''}</p>
+        <div class="video-container" style="margin-bottom:10px;">
+            <iframe src="${v.url}" frameborder="0" allowfullscreen></iframe>
+        </div>
+        ${db.currentUser && db.currentUser.role === 'admin' ? `
+        <div class="item-actions">
+            <button onclick="deleteVideo(${v.id})" class="btn-danger btn-sm"><i class="fas fa-trash"></i> Delete Video</button>
+        </div>
+        ` : ''}
+    </div>
+`).join('');
+const studentName = document.getElementById('studentName').value;
+const studentId = document.getElementById('studentId').value;
+const subject = document.getElementById('subject').value;
+const assignmentRef = document.getElementById('assignmentRef').value;
+const fileInput = document.getElementById('courseworkFile');
+
+const submission = {
+    id: db.submissions.length + 1,
+    studentName,
+    studentId,
+    subject,
+    assignmentRef,
+    file: fileInput.files[0] ? fileInput.files[0].name : 'submission.pdf',
+    date: new Date().toISOString().split('T')[0],
+    status: 'pending'
+};
+
+db.submissions.push(submission);
+renderSubmissions();
+document.getElementById('submissionForm').reset();
+showAlert('submissionAlert', 'Coursework submitted successfully!', 'success');
+// Filter submissions for tutor
+let filteredSubmissions = db.submissions;
+if (db.currentUser && db.currentUser.role === 'tutor') {
+    const tutorSubjects = db.tutorSubjects[db.currentUser.email] || [];
+    filteredSubmissions = db.submissions.filter(s => 
+        tutorSubjects.some(ts => s.subject.includes(ts)) || s.subject.includes('Real Life Project 2')
+    );
+}
+
+const displayHTML = db.currentUser && db.currentUser.role !== 'student' ? `
+    <div id="submissionsContainer">
+    ${filteredSubmissions.length === 0 ? '<div class="empty-state"><i class="fas fa-folder-open"></i><h3>No Submissions</h3><p>No submissions have been received yet.</p></div>' : filteredSubmissions.map(s => `
+        <div class="item-card">
+            <div class="item-header">
+                <span class="item-title">${s.studentName}</span>
+                <span class="item-badge badge-${s.status === 'pending' ? 'warning' : 'success'}">${s.status.toUpperCase()}</span>
+            </div>
+            <div class="item-meta">
+                <span><i class="fas fa-id-card"></i> ${s.studentId}</span>
+                <span><i class="fas fa-book"></i> ${s.subject}</span>
+                <span><i class="fas fa-tasks"></i> ${s.assignmentRef}</span>
+                <span><i class="fas fa-calendar"></i> ${s.date}</span>
+            </div>
+            <div class="item-actions">
+                <button class="btn-primary btn-sm"><i class="fas fa-download"></i> Download</button>
+                <button onclick="markSubmission(${s.id})" class="btn-secondary btn-sm"><i class="fas fa-check"></i> Mark as Reviewed</button>
+            </div>
+        </div>
+    `).join('')}
+    </div>
+` : '';
+// Filter submissions for tutor
+let filteredSubmissions = db.submissions;
+if (db.currentUser && db.currentUser.role === 'tutor') {
+    const tutorSubjects = db.tutorSubjects[db.currentUser.email] || [];
+    filteredSubmissions = db.submissions.filter(s => 
+        tutorSubjects.some(ts => s.subject.includes(ts)) || s.subject.includes('Real Life Project 2')
+    );
+}
+
+const displayHTML = db.currentUser && db.currentUser.role !== 'student' ? `
+    <div id="submissionsContainer">
+    ${filteredSubmissions.length === 0 ? '<div class="empty-state"><i class="fas fa-folder-open"></i><h3>No Submissions</h3><p>No submissions have been received yet.</p></div>' : filteredSubmissions.map(s => `
+        <div class="item-card">
+            <div class="item-header">
+                <span class="item-title">${s.studentName}</span>
+                <span class="item-badge badge-${s.status === 'pending' ? 'warning' : 'success'}">${s.status.toUpperCase()}</span>
+            </div>
+            <div class="item-meta">
+                <span><i class="fas fa-id-card"></i> ${s.studentId}</span>
+                <span><i class="fas fa-book"></i> ${s.subject}</span>
+                <span><i class="fas fa-tasks"></i> ${s.assignmentRef}</span>
+                <span><i class="fas fa-calendar"></i> ${s.date}</span>
+            </div>
+            <div class="item-actions">
+                <button class="btn-primary btn-sm"><i class="fas fa-download"></i> Download</button>
+                <button onclick="markSubmission(${s.id})" class="btn-secondary btn-sm"><i class="fas fa-check"></i> Mark as Reviewed</button>
+            </div>
+        </div>
+    `).join('')}
+    </div>
+` : '';
+
+// Only update if element exists and user is admin/tutor
+const existingContainer = document.getElementById('submissionsContainer');
+if (existingContainer) {
+    existingContainer.innerHTML = filteredSubmissions.length === 0 ? 
+        '<div class="empty-state"><i class="fas fa-folder-open"></i><h3>No Submissions</h3><p>No submissions have been received yet.</p></div>' : 
+        filteredSubmissions.map(s => `
+        <div class="item-card">
+            <div class="item-header">
+                <span class="item-title">${s.studentName}</span>
+                <span class="item-badge badge-${s.status === 'pending' ? 'warning' : 'success'}">${s.status.toUpperCase()}</span>
+            </div>
+            <div class="item-meta">
+                <span><i class="fas fa-id-card"></i> ${s.studentId}</span>
+                <span><i class="fas fa-book"></i> ${s.subject}</span>
+                <span><i class="fas fa-tasks"></i> ${s.assignmentRef}</span>
+                <span><i class="fas fa-calendar"></i> ${s.date}</span>
+            </div>
+            <div class="item-actions">
+                <button class="btn-primary btn-sm"><i class="fas fa-download"></i> Download</button>
+                <button onclick="markSubmission(${s.id})" class="btn-secondary btn-sm"><i class="fas fa-check"></i> Mark as Reviewed</button>
+            </div>
+        </div>
+    `).join('');
+}
+db.contact = {
+    name: document.getElementById('adminName').value,
+    email: document.getElementById('adminEmail').value,
+    phone: document.getElementById('adminPhone').value
+};
+
+renderContact();
+document.getElementById('adminContactForm').reset();
+showAlert('contactAlert', 'Contact information updated successfully!', 'success');
+container.innerHTML = `
+    <h3><i class="fas fa-address-card"></i> ${db.contact.name}</h3>
+    <p><i class="fas fa-envelope"></i> <a href="mailto:${db.contact.email}">${db.contact.email}</a></p>
+    <p><i class="fas fa-phone"></i> <a href="tel:${db.contact.phone}">${db.contact.phone}</a></p>
+`;
+const alertClass = type === 'success' ? 'alert-success' : type === 'warning' ? 'alert-warning' : type === 'danger' ? 'alert-danger' : 'alert-info';
+const icon = type === 'success' ? 'fa-check-circle' : type === 'warning' ? 'fa-exclamation-triangle' : type === 'danger' ? 'fa-times-circle' : 'fa-info-circle';
+
+container.innerHTML = `<div class="alert ${alertClass}"><i class="fas ${icon}"></i> ${message}</div>`;
+
+setTimeout(() => {
+    container.innerHTML = '';
+}, 5000);
